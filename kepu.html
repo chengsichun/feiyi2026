@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>非遗科普 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .kepu-section {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 38px 40px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(200, 195, 188, 0.25);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .kepu-section h2 {
+            color: #7a7a6a;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.2);
+        }
+
+        .kepu-section h2 small {
+            font-size: 14px;
+            color: #a3a88f;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-left: 12px;
+        }
+
+        .kepu-section p {
+            color: #4a4a4a;
+            font-size: 15px;
+            line-height: 2;
+            text-indent: 2em;
+            margin: 12px 0 6px;
+        }
+
+        .kepu-section ul {
+            padding-left: 30px;
+            margin: 10px 0 6px;
+        }
+
+        .kepu-section ul li {
+            color: #4a4a4a;
+            font-size: 15px;
+            line-height: 2.2;
+            list-style: disc;
+        }
+
+        .kepu-section ul li strong {
+            color: #7a7a6a;
+        }
+
+        .kepu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 15px 0 5px;
+        }
+
+        .kepu-grid .item {
+            background: rgba(251, 245, 239, 0.6);
+            border-radius: 10px;
+            padding: 20px 24px;
+            border-left: 4px solid #a3a88f;
+        }
+
+        .kepu-grid .item h4 {
+            color: #7a7a6a;
+            font-size: 17px;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .kepu-grid .item p {
+            color: #6a6a5a;
+            font-size: 14px;
+            line-height: 1.9;
+            text-indent: 0;
+            margin: 0;
+        }
+
+        .kepu-grid .item .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        .level-chart {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 18px 0 5px;
+        }
+
+        .level-chart .level {
+            text-align: center;
+            padding: 14px 8px;
+            border-radius: 10px;
+            background: rgba(251, 245, 239, 0.6);
+            border: 1px solid rgba(200, 195, 188, 0.2);
+        }
+
+        .level-chart .level .name {
+            font-weight: 600;
+            color: #7a7a6a;
+            font-size: 16px;
+        }
+
+        .level-chart .level .desc {
+            font-size: 12px;
+            color: #a3a88f;
+            margin-top: 4px;
+        }
+
+        .level-chart .level.level-1 { background: #e8e6dc; border-color: #a3a88f; }
+        .level-chart .level.level-2 { background: #eeede4; border-color: #b8bda3; }
+        .level-chart .level.level-3 { background: #f2f0e8; border-color: #c8cdb8; }
+        .level-chart .level.level-4 { background: #f5f3ec; border-color: #d4d0c4; }
+        .level-chart .level.level-5 { background: #f8f6f0; border-color: #d9d0c8; }
+
+        .level-chart .level .badge {
+            display: inline-block;
+            font-size: 11px;
+            background: #7a7a6a;
+            color: #fff;
+            padding: 1px 12px;
+            border-radius: 20px;
+            margin-top: 6px;
+        }
+
+        .highlight-box {
+            text-indent: 0;
+            margin-top: 12px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: #7a7a6a;
+            font-weight: 500;
+            background: rgba(251, 245, 239, 0.6);
+            border-left: 4px solid #a3a88f;
+        }
+
+        .warning-box {
+            text-indent: 0;
+            margin-top: 12px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: #7a5a5a;
+            font-weight: 500;
+            background: rgba(249, 230, 230, 0.5);
+            border-left: 4px solid #c97a7a;
+        }
+
+        @media screen and (max-width: 768px) {
+            .kepu-section {
+                padding: 24px 18px;
+            }
+            .kepu-grid {
+                grid-template-columns: 1fr;
+            }
+            .level-chart {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+   <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>非遗科普</h1>
+        <p>了解非物质文化遗产 · 守护民族记忆</p>
+        <div class="split-line"></div>
+    </div>
+
+    <!-- ===== 什么是非遗 ===== -->
+    <div class="kepu-section">
+        <h2>一、什么是非物质文化遗产 <small>Intangible Cultural Heritage</small></h2>
+        <p>非物质文化遗产，简称"非遗"，是指各族人民世代相传，并视为其文化遗产组成部分的各种传统文化表现形式，以及与传统文化表现形式相关的实物和场所。</p>
+        <p>非物质文化遗产最大的特点是"活态传承"，它不是静止的文物，而是活在民间、代代相传的文化实践。它包含了一个民族的历史记忆、生活智慧、审美情趣和价值观念，是民族文化认同的重要基础。</p>
+        <div class="highlight-box">
+            📖 简单来说：非遗就是"活着的历史"，是祖先留给我们的精神财富。
+        </div>
+    </div>
+
+    <!-- ===== 非遗分类等级 ===== -->
+    <div class="kepu-section">
+        <h2>二、非遗的分类与等级</h2>
+        <p>我国非物质文化遗产实行分级保护制度，根据其历史价值、文化价值和传承状况，分为五个等级：</p>
+        <div class="level-chart">
+            <div class="level level-1">
+                <div class="name">世界级</div>
+                <div class="desc">联合国教科文组织</div>
+                <span class="badge">人类非遗代表作</span>
+            </div>
+            <div class="level level-2">
+                <div class="name">国家级</div>
+                <div class="desc">国务院批准公布</div>
+                <span class="badge">国家级非遗名录</span>
+            </div>
+            <div class="level level-3">
+                <div class="name">省级</div>
+                <div class="desc">省级人民政府</div>
+                <span class="badge">省级非遗名录</span>
+            </div>
+            <div class="level level-4">
+                <div class="name">市级</div>
+                <div class="desc">市级人民政府</div>
+                <span class="badge">市级非遗名录</span>
+            </div>
+            <div class="level level-5">
+                <div class="name">县级</div>
+                <div class="desc">县级人民政府</div>
+                <span class="badge">县级非遗名录</span>
+            </div>
+        </div>
+        <p style="font-size:14px;color:#a3a88f;text-indent:0;margin-top:6px;">截至2025年，中国共有43个项目入选联合国教科文组织人类非物质文化遗产代表作名录，位居世界第一。</p>
+    </div>
+
+    <!-- ===== 非遗涵盖门类 ===== -->
+    <div class="kepu-section">
+        <h2>三、非遗涵盖的十大门类</h2>
+        <p>根据《中华人民共和国非物质文化遗产法》，非物质文化遗产涵盖以下十大类别：</p>
+        <div class="kepu-grid">
+            <div class="item">
+                <h4>🎭 传统戏剧</h4>
+                <p>京剧、昆曲、粤剧、黄梅戏、越剧等，以唱念做打演绎千年故事。</p>
+                <span class="tag">代表：京剧</span>
+            </div>
+            <div class="item">
+                <h4>🧵 传统美术与技艺</h4>
+                <p>刺绣、剪纸、陶瓷、木雕、泥塑、银饰锻造等，指尖上的匠心传承。</p>
+                <span class="tag">代表：苏绣</span>
+            </div>
+            <div class="item">
+                <h4>🎵 传统音乐</h4>
+                <p>古琴艺术、蒙古族长调、侗族大歌、南音等，流淌千年的民族之声。</p>
+                <span class="tag">代表：古琴</span>
+            </div>
+            <div class="item">
+                <h4>💃 传统舞蹈</h4>
+                <p>秧歌、傩舞、孔雀舞、藏族锅庄等，用肢体传承民族记忆。</p>
+                <span class="tag">代表：秧歌</span>
+            </div>
+            <div class="item">
+                <h4>📖 曲艺</h4>
+                <p>苏州评弹、相声、快板、京韵大鼓等，说唱间的中国智慧。</p>
+                <span class="tag">代表：苏州评弹</span>
+            </div>
+            <div class="item">
+                <h4>🎪 民俗</h4>
+                <p>春节、端午、中秋、庙会、二十四节气等，流淌在血脉中的文化记忆。</p>
+                <span class="tag">代表：端午节</span>
+            </div>
+            <div class="item">
+                <h4>🏺 传统医药</h4>
+                <p>中医针灸、藏医药、蒙医药、太极拳等，以自然之道守护生命健康。</p>
+                <span class="tag">代表：中医针灸</span>
+            </div>
+            <div class="item">
+                <h4>📜 民间文学</h4>
+                <p>神话传说、史诗、民间故事、谚语等，口耳相传的文学瑰宝。</p>
+                <span class="tag">代表：格萨尔史诗</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 非遗保护的意义 ===== -->
+    <div class="kepu-section">
+        <h2>四、为什么要保护非物质文化遗产</h2>
+        <p>非遗是民族文化的"根"与"魂"，它记录着一个民族的历史记忆、生产生活方式和精神世界。保护非遗，就是守护民族的记忆，传承文化的血脉。</p>
+        <p><strong>保护非遗的重要意义：</strong></p>
+        <ul>
+            <li><strong>文化认同：</strong>非遗是民族身份和文化认同的重要基础，承载着民族的集体记忆和精神内核。</li>
+            <li><strong>历史价值：</strong>非遗是"活的历史"，记录着人类文明的发展历程和生产生活方式的变迁。</li>
+            <li><strong>审美价值：</strong>非遗蕴含着一个民族独特的审美观念和艺术创造力，是世界文化多样性的重要体现。</li>
+            <li><strong>社会价值：</strong>非遗凝聚着社会共识和民族情感，是增强文化自信和民族自豪感的重要源泉。</li>
+            <li><strong>经济价值：</strong>非遗的创造性转化和创新性发展，能够带动文化产业、旅游产业和乡村振兴。</li>
+        </ul>
+        <div class="highlight-box">
+            🏛️ 2004年，中国加入联合国教科文组织《保护非物质文化遗产公约》，标志着非遗保护上升为国家文化战略。
+        </div>
+    </div>
+
+    <!-- ===== 非遗传承面临的挑战 ===== -->
+    <div class="kepu-section">
+        <h2>五、非遗传承面临的挑战</h2>
+        <p>尽管国家和社会各界对非遗保护越来越重视，但非遗传承仍然面临诸多严峻挑战：</p>
+        <ul>
+            <li><strong>传承人老龄化：</strong>许多非遗项目的传承人年事已高，年轻人不愿学、没人接班，面临"人亡艺绝"的风险。据统计，国家级非遗传承人中，60岁以上的占比超过70%。</li>
+            <li><strong>市场化冲击：</strong>随着工业化、城市化的发展，大量传统手工艺品被机器制品替代，非遗的市场空间不断被压缩，许多技艺失去了生存的土壤。</li>
+            <li><strong>生活方式改变：</strong>现代生活方式的快节奏和消费习惯的变化，使许多传统民俗、传统节庆活动逐渐淡化甚至消失，非遗失去了存续的文化生态。</li>
+            <li><strong>资金投入不足：</strong>非遗保护需要大量的资金投入，但地方财政能力有限，社会资本参与不足，许多非遗项目缺乏持续的资金保障。</li>
+            <li><strong>数字化保护滞后：</strong>非遗的数字化记录和保存工作起步较晚，许多珍贵的非遗资料尚未得到系统性的数字化整理和保存。</li>
+        </ul>
+        <div class="warning-box">
+            ⚠️ 保护非遗，就是与时间赛跑。我们做的每一份努力，都可能让一项濒危技艺得以延续。
+        </div>
+    </div>
+
+    <!-- ===== 我们能为非遗做什么 ===== -->
+    <div class="kepu-section">
+        <h2>六、我们能为非遗做什么</h2>
+        <p>非遗保护不仅是国家和传承人的责任，也是我们每一个普通人可以参与的事业：</p>
+        <ul>
+            <li><strong>了解与关注：</strong>主动了解身边的非遗项目，关注非遗保护的动态和资讯，提高对非遗的认知和关注度。</li>
+            <li><strong>体验与传播：</strong>参加非遗体验活动、参观非遗展览、观看非遗表演，通过社交媒体分享非遗知识和故事。</li>
+            <li><strong>消费与支持：</strong>购买非遗文创产品、支持非遗传承人的创作和经营，以消费推动非遗的可持续发展。</li>
+            <li><strong>学习与传承：</strong>有兴趣的年轻人可以拜师学艺，成为非遗传承的后备力量，让技艺薪火相传。</li>
+            <li><strong>保护与倡导：</strong>不购买非法的非遗文物，不参与破坏非遗文化生态的行为，倡导尊重和保护非遗的社会风尚。</li>
+        </ul>
+        <div class="highlight-box">
+            🌱 每一个人都可以是非遗的守护者。你的每一次关注、每一次分享、每一次体验，都在为非遗的传承贡献力量。
+        </div>
+    </div>
+
+    <!-- ===== 中国非遗数据 ===== -->
+    <div class="kepu-section">
+        <h2>七、中国非遗数据速览</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:15px 0 5px;">
+            <div style="background:rgba(251,245,239,0.6);border-radius:12px;padding:20px 15px;text-align:center;border:1px solid rgba(200,195,188,0.2);">
+                <p style="font-size:36px;color:#7a7a6a;font-weight:700;margin:0;text-align:center;">43</p>
+                <p style="color:#a3a88f;font-size:14px;margin:4px 0 0 0;padding:0;text-align:center;">人类非遗代表作名录</p>
+                <p style="color:#b8bda3;font-size:12px;margin:2px 0 0 0;padding:0;text-align:center;">位居世界第一</p>
+            </div>
+            <div style="background:rgba(251,245,239,0.6);border-radius:12px;padding:20px 15px;text-align:center;border:1px solid rgba(200,195,188,0.2);">
+                <p style="font-size:36px;color:#7a7a6a;font-weight:700;margin:0;text-align:center;">1557</p>
+                <p style="color:#a3a88f;font-size:14px;margin:4px 0 0 0;padding:0;text-align:center;">国家级非遗代表性项目</p>
+                <p style="color:#b8bda3;font-size:12px;margin:2px 0 0 0;padding:0;text-align:center;">覆盖十大门类</p>
+            </div>
+            <div style="background:rgba(251,245,239,0.6);border-radius:12px;padding:20px 15px;text-align:center;border:1px solid rgba(200,195,188,0.2);">
+                <p style="font-size:36px;color:#7a7a6a;font-weight:700;margin:0;text-align:center;">3068</p>
+                <p style="color:#a3a88f;font-size:14px;margin:4px 0 0 0;padding:0;text-align:center;">国家级非遗传承人</p>
+                <p style="color:#b8bda3;font-size:12px;margin:2px 0 0 0;padding:0;text-align:center;">其中70%已超60岁</p>
+            </div>
+        </div>
+        <p style="font-size:13px;color:#b8bda3;text-indent:0;text-align:center;margin-top:6px;">数据来源：中国非物质文化遗产网（截至2025年）</p>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

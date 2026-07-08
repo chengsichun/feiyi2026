@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>服装联动 - 非遗跨界</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 8px 24px;
+            background: rgba(163, 168, 143, 0.12);
+            border-radius: 25px;
+            color: #7a7a6a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(163, 168, 143, 0.2);
+        }
+
+        .story-box {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .story-box .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.12);
+        }
+        .story-box .header .icon { font-size: 30px; }
+        .story-box .header .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 2px;
+        }
+        .story-box .header .count {
+            font-size: 13px;
+            color: #a3a88f;
+            margin-left: auto;
+            background: rgba(163, 168, 143, 0.1);
+            padding: 2px 16px;
+            border-radius: 20px;
+        }
+
+        .item {
+            display: flex;
+            gap: 30px;
+            padding: 26px 0;
+            border-bottom: 1px dashed rgba(200, 195, 188, 0.12);
+        }
+        .item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .item .img-box {
+            flex-shrink: 0;
+            width: 230px;
+            height: 190px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            color: #a3a88f;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+        }
+        .item .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item .info { flex: 1; }
+        .item .info .brand-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .item .info h4 {
+            color: #7a7a6a;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .item .info .sub {
+            color: #a3a88f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .item .info .tag-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .item .info .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .item .info .tag-group .tag.hot {
+            background: #f9e6e6;
+            color: #c97a7a;
+        }
+        .item .info p {
+            color: #4a4a4a;
+            font-size: 14.5px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .item .info .meaning {
+            background: rgba(251, 245, 239, 0.6);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            font-size: 14px;
+            color: #6a6a5a;
+            line-height: 1.8;
+        }
+        .item .info .meaning strong { color: #7a7a6a; }
+
+        .item.reverse { flex-direction: row-reverse; }
+
+        @media screen and (max-width: 768px) {
+            .story-box { padding: 20px 16px; }
+            .item { flex-direction: column !important; padding: 18px 0; }
+            .item .img-box { width: 100%; height: 160px; }
+            .story-box .header .name { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <a href="liandong.html" class="back-link">← 返回联动首页</a>
+
+    <div class="hero-title">
+        <h1>👗 服装联动</h1>
+        <p>非遗走上国际T台 · 针线间的东方美学</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        👗 从中国李宁到盖娅传说，从密扇到ICICLE……<br>
+        🌟 中国服装品牌正在用非遗讲述东方时尚的故事。
+    </p>
+
+    <!-- ===== 中国李宁 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">👗</span>
+            <span class="name">中国李宁</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/zhongguolining.jpg" alt="李宁×苗绣" onerror="this.parentElement.innerHTML='👗'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">中国李宁</span>
+                <h4>中国李宁 × 贵州苗绣</h4>
+                <div class="sub">2023年 · 巴黎时装周</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">苗绣</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>中国李宁与贵州苗绣非遗传承人合作，将苗族传统刺绣图案融入运动服饰设计。系列以苗绣中常见的蝴蝶、花卉、几何纹样为灵感，结合现代剪裁和面料工艺，推出卫衣、夹克、配饰等单品。该系列在巴黎时装周亮相后引发广泛关注，成为国潮与非遗结合的标杆案例。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 让中国非遗走上国际时尚舞台，打破了“非遗=老土”的刻板印象。苗绣的绚丽色彩与现代运动服设计的碰撞，证明了非遗完全可以成为国际时尚的灵感来源。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 盖娅传说 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">👗</span>
+            <span class="name">盖娅传说</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/gairuichuanshuo.jpg" alt="盖娅传说×苏绣" onerror="this.parentElement.innerHTML='👗'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">盖娅传说</span>
+                <h4>盖娅传说 × 苏绣 · 高定礼服</h4>
+                <div class="sub">长期 · 高级定制</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">苏绣</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>盖娅传说作为中国高定品牌，长期与苏绣非遗传承人合作，将苏绣工艺融入高定礼服设计。品牌创始人熊英多次在国际时装周上展示苏绣礼服，将中国传统刺绣工艺与西方礼服剪裁相结合，打造出兼具东方美学与国际时尚的高级定制作品。盖娅传说的苏绣礼服曾多次亮相戛纳电影节等国际红毯。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 将苏绣非遗工艺与高级定制结合，让中国非遗在国际时尚舞台大放异彩，树立了中国非遗的国际形象。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 密扇 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">👗</span>
+            <span class="name">密扇 MUKZIN</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/mishan.jpg" alt="密扇×非遗" onerror="this.parentElement.innerHTML='👗'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">密扇 MUKZIN</span>
+                <h4>密扇 × 非遗系列 · 东方再造</h4>
+                <div class="sub">2023-2025年 · 长期合作</div>
+                <div class="tag-group">
+                    <span class="tag">非遗时尚</span>
+                    <span class="tag">东方美学</span>
+                </div>
+                <p>密扇长期致力于非遗元素的时尚化表达，将刺绣、扎染、蜡染等非遗工艺融入现代服装设计。品牌以“东方再造”为理念，通过对非遗工艺的当代解读，创造出兼具传统韵味与现代审美的服装作品。密扇的非遗系列多次在上海时装周亮相，受到年轻消费者的追捧。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 以当代设计语言重新诠释非遗工艺，让非遗时尚化、年轻化，成为年轻人愿意穿在身上的文化表达。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0 40px;">
+        <a href="liandong.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">← 返回联动首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

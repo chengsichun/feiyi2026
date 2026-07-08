@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>餐厅联动 - 非遗跨界</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 8px 24px;
+            background: rgba(163, 168, 143, 0.12);
+            border-radius: 25px;
+            color: #7a7a6a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(163, 168, 143, 0.2);
+        }
+
+        .story-box {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .story-box .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.12);
+        }
+        .story-box .header .icon { font-size: 30px; }
+        .story-box .header .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 2px;
+        }
+        .story-box .header .count {
+            font-size: 13px;
+            color: #a3a88f;
+            margin-left: auto;
+            background: rgba(163, 168, 143, 0.1);
+            padding: 2px 16px;
+            border-radius: 20px;
+        }
+
+        .item {
+            display: flex;
+            gap: 30px;
+            padding: 26px 0;
+            border-bottom: 1px dashed rgba(200, 195, 188, 0.12);
+        }
+        .item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .item .img-box {
+            flex-shrink: 0;
+            width: 230px;
+            height: 190px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            color: #a3a88f;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+        }
+        .item .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item .info { flex: 1; }
+        .item .info .brand-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .item .info h4 {
+            color: #7a7a6a;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .item .info .sub {
+            color: #a3a88f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .item .info .tag-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .item .info .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .item .info .tag-group .tag.hot {
+            background: #f9e6e6;
+            color: #c97a7a;
+        }
+        .item .info p {
+            color: #4a4a4a;
+            font-size: 14.5px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .item .info .meaning {
+            background: rgba(251, 245, 239, 0.6);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            font-size: 14px;
+            color: #6a6a5a;
+            line-height: 1.8;
+        }
+        .item .info .meaning strong { color: #7a7a6a; }
+
+        .item.reverse { flex-direction: row-reverse; }
+
+        @media screen and (max-width: 768px) {
+            .story-box { padding: 20px 16px; }
+            .item { flex-direction: column !important; padding: 18px 0; }
+            .item .img-box { width: 100%; height: 160px; }
+            .story-box .header .name { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <a href="liandong.html" class="back-link">← 返回联动首页</a>
+
+    <div class="hero-title">
+        <h1>🍽️ 餐厅联动</h1>
+        <p>舌尖上的非遗跨界 · 一餐一饭皆有故事</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        🍽️ 从西贝莜面村到海底捞，从星巴克到肯德基……<br>
+        🌾 餐厅正在用美食讲述非遗的故事。
+    </p>
+
+   <!-- ===== 汪茂元羊肉面 ===== -->
+<div class="story-box">
+    <div class="header">
+        <span class="icon">🍜</span>
+        <span class="name">汪茂元羊肉面</span>
+        <span class="count">1 个联动</span>
+    </div>
+
+    <div class="item">
+        <div class="img-box">
+            <img src="img/wangyuanmao.jpg" alt="汪茂元羊肉面" onerror="this.parentElement.innerHTML='🍜'">
+        </div>
+        <div class="info">
+            <span class="brand-tag">汪茂元羊肉面</span>
+            <h4>汪茂元羊肉面 × 陕北非遗老字号</h4>
+            <div class="sub">1979年创立 · 三代传承</div>
+            <div class="tag-group">
+                <span class="tag hot">🔥 陕西老字号</span>
+                <span class="tag">榆林老字号</span>
+                <span class="tag">非遗美食</span>
+            </div>
+            <p>汪茂元羊肉面创始于1979年，由汪茂元在绥德县四十里铺创立，至今已传承三代人、四十余年。品牌被评定为“榆林老字号”和“陕西老字号”，门店招牌标注“非遗老字号”。招牌羊肉面精选陕北横山羊肉，肉质鲜嫩、不腥不膻，搭配手工揪面片和久煮羊骨汤，香而不膻、爽滑筋道。从绥德四十里铺到榆林、西安，汪茂元羊肉面已成为陕北特色美食的靓丽名片，承载着陕北人的味觉记忆。[citation:2]</p>
+            <div class="meaning">
+                <strong>💡 意义：</strong> 一碗传承四十余年的羊肉面，承载的是陕北非遗美食文化的活态传承。从食材选料到制作工艺，从一家店到如今多家直营店，汪茂元三代人以匠人之心守护着陕北老味道。
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- ===== 海底捞 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">🍽️</span>
+            <span class="name">海底捞</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/haidilao.jpg" alt="海底捞×川剧变脸" onerror="this.parentElement.innerHTML='🍽️'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">海底捞</span>
+                <h4>海底捞 × 川剧变脸 · 非遗表演进餐厅</h4>
+                <div class="sub">长期 · 门店表演</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">川剧变脸</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>海底捞在全国多家门店引入川剧变脸表演，将国家级非遗川剧变脸融入火锅用餐体验。顾客在享受火锅的同时，可以近距离观看变脸艺人的精彩表演，感受川剧艺术的魅力。海底捞还将川剧变脸与生日祝福、节日庆典等场景结合，让非遗表演成为用餐体验的一部分。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 将非遗表演融入日常餐饮消费场景，让非遗不再遥远，成为大众触手可及的文化体验。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 星巴克 ===== -->
+<div class="story-box">
+    <div class="header">
+        <span class="icon">☕</span>
+        <span class="name">星巴克</span>
+        <span class="count">1 个联动</span>
+    </div>
+
+    <div class="item">
+        <div class="img-box">
+            <img src="img/xingbake.jpg" alt="星巴克×醒狮" onerror="this.parentElement.innerHTML='☕'">
+        </div>
+        <div class="info">
+            <span class="brand-tag">星巴克</span>
+            <h4>星巴克 × 广府醒狮 · 非遗概念店</h4>
+            <div class="sub">2026年 · 广州永庆坊</div>
+            <div class="tag-group">
+                <span class="tag hot">🔥 热门</span>
+                <span class="tag">醒狮</span>
+                <span class="tag">粤剧</span>
+                <span class="tag">国家级非遗</span>
+            </div>
+            <p>2026年1月，星巴克华南首家非遗概念店于广州永庆坊开业。门店以“广府非遗会客厅”为定位，将粤剧、醒狮等岭南非遗元素融入咖啡空间。二楼楼梯端景墙的“粤狮新语”装置，以岭南醒狮为原型，融合粤剧戏服面料、竹编工艺与星巴克标志性绿围裙元素，赋予广府文化新寓意。门店还推出限定饮品“醒狮拿铁”和醒狮冰箱贴、醒狮挂饰等周边产品，让非遗文化以日常消费为载体走进年轻人的生活。[citation:1][citation:7]</p>
+            <div class="meaning">
+                <strong>💡 意义：</strong> 国际咖啡品牌与岭南非遗的深度对话，让醒狮、粤剧等非遗文化以“第三空间”为媒介触达更广泛的消费群体，实现了非遗的生活化、年轻化传播。
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div style="text-align:center;margin:20px 0 40px;">
+        <a href="liandong.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">← 返回联动首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

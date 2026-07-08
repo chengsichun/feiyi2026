@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>非遗浏览 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== 下拉菜单样式 ===== */
+        .nav-item-dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 0 4px;
+        }
+
+        .nav-item-dropdown > a {
+            display: block;
+            color: #fff;
+            padding: 15px 8px 15px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-item-dropdown .dropdown-arrow {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 4px 4px 4px 0;
+            user-select: none;
+        }
+
+        .nav-item-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 10px 0;
+            min-width: 160px;
+            box-shadow: 0 12px 44px rgba(0, 0, 0, 0.10);
+            border: 1px solid rgba(200, 195, 188, 0.18);
+            z-index: 1000;
+            list-style: none;
+        }
+
+        .nav-item-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 22px;
+            color: #4a4a4a;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .dropdown-menu li a:hover {
+            background: rgba(163, 168, 143, 0.10);
+            color: #7a7a6a;
+        }
+
+        .dropdown-menu li a::before {
+            content: "◆ ";
+            color: #a3a88f;
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        .region-section {
+            margin-bottom: 45px;
+            scroll-margin-top: 80px;
+        }
+        .region-title {
+            font-size: 24px;
+            color: #7a7a6a;
+            letter-spacing: 3px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.2);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .region-title .badge {
+            font-size: 13px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        .region-title .desc {
+            font-size: 14px;
+            color: #a3a88f;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+        .region-card {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 195, 188, 0.25);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+            transition: all 0.3s;
+        }
+        .region-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 28px rgba(163, 168, 143, 0.14);
+        }
+        .region-card .card-img {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            background-color: #ece5dc;
+        }
+        .region-card .card-body {
+            padding: 16px 20px 20px;
+        }
+        .region-card .card-body h4 {
+            color: #7a7a6a;
+            font-size: 17px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .region-card .card-body .sub {
+            color: #a3a88f;
+            font-size: 13px;
+        }
+        .region-card .card-body p {
+            color: #6a6a5a;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 8px 0 12px;
+        }
+        .region-card .card-body .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .region-card .card-body .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 12px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .region-card .card-body a {
+            display: inline-block;
+            padding: 5px 18px;
+            border: 1px solid rgba(163, 168, 143, 0.3);
+            border-radius: 20px;
+            font-size: 13px;
+            color: #7a7a6a;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .region-card .card-body a:hover {
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            border-color: #a3a88f;
+        }
+
+        /* 底部五个方位导航卡片 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 20px 0 10px;
+        }
+        .nav-grid .nav-item {
+            background: linear-gradient(135deg, rgba(251, 245, 239, 0.6), rgba(251, 245, 239, 0.3));
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            cursor: pointer;
+        }
+        .nav-grid .nav-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 24px rgba(163, 168, 143, 0.16);
+            border-color: #a3a88f;
+        }
+        .nav-grid .nav-item .icon {
+            font-size: 28px;
+            display: block;
+        }
+        .nav-grid .nav-item .name {
+            font-size: 14px;
+            color: #7a7a6a;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .nav-grid .nav-item .style {
+            font-size: 11px;
+            color: #a3a88f;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .region-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .nav-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .region-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>非遗浏览</h1>
+        <p>一方水土一方艺 · 探寻东西南北中的非遗瑰宝</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#557777;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        中国幅员辽阔，东西南北中，风土人情各异，孕育出丰富多彩的非物质文化遗产。<br>
+        跟随地域的足迹，感受不同水土滋养出的非遗之美。
+    </p>
+
+    <!-- ============================================================ -->
+    <!-- 东部地区 -->
+    <!-- ============================================================ -->
+    <div class="region-section" id="region-east">
+        <div class="region-title">
+            🌅 东部地区
+            <span class="badge">江南水乡 · 精雅灵秀</span>
+            <span class="desc">｜苏绣、油纸伞、云肩、冰裂纹瓷器</span>
+        </div>
+        <div class="region-grid">
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/suxiu2.jpg');"></div>
+                <div class="card-body">
+                    <h4>苏绣</h4>
+                    <div class="sub">江苏苏州</div>
+                    <p>四大名绣之首，精细雅洁，双面绣正反如一，被誉为"东方艺术的明珠"。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-suxiu.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/youzhisan2.jpg');"></div>
+                <div class="card-body">
+                    <h4>油纸伞</h4>
+                    <div class="sub">浙江杭州</div>
+                    <p>百道工序纯手工制作，兼具实用与美感，东方美学的流动符号。</p>
+                    <div class="tag-group">
+                        <span class="tag">传统技艺</span>
+                        <span class="tag">省级非遗</span>
+                    </div>
+                    <a href="detail-youzhisan.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/yunjian1.jpg');"></div>
+                <div class="card-body">
+                    <h4>传统云肩</h4>
+                    <div class="sub">江苏</div>
+                    <p>刺绣云肩如云朵披肩，纹样精美雅致，承载千年服饰文化。</p>
+                    <div class="tag-group">
+                        <span class="tag">传统服饰</span>
+                        <span class="tag">省级非遗</span>
+                    </div>
+                    <a href="detail-yunjian.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/bingliewenci3.jpg');"></div>
+                <div class="card-body">
+                    <h4>冰裂纹瓷器</h4>
+                    <div class="sub">浙江龙泉</div>
+                    <p>青瓷釉面自然开片，纹如冰裂金丝铁线，宋代哥窑传世名品。</p>
+                    <div class="tag-group">
+                        <span class="tag">陶瓷</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-bingliewenciqi.html">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 西部地区 -->
+    <!-- ============================================================ -->
+    <div class="region-section" id="region-west">
+        <div class="region-title">
+            🏔️ 西部地区
+            <span class="badge">高原大漠 · 古朴豪迈</span>
+            <span class="desc">｜剪纸、扎染、绒花、蜀绣</span>
+        </div>
+        <div class="region-grid">
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/jianzhi2.jpg');"></div>
+                <div class="card-body">
+                    <h4>剪纸</h4>
+                    <div class="sub">陕西延安</div>
+                    <p>粗犷豪放、古朴稚拙，一把剪刀一方红纸，剪出黄土高原的魂。</p>
+                    <div class="tag-group">
+                        <span class="tag">民间美术</span>
+                        <span class="tag">人类非遗</span>
+                    </div>
+                    <a href="detail-jianzhi.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/zaran.jpg');"></div>
+                <div class="card-body">
+                    <h4>白族扎染</h4>
+                    <div class="sub">云南大理</div>
+                    <p>手工捆扎染色，纹样独一无二，蓝白交织的苍山洱海之色。</p>
+                    <div class="tag-group">
+                        <span class="tag">印染</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-zaran.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/ronghua3.jpg');"></div>
+                <div class="card-body">
+                    <h4>绒花</h4>
+                    <div class="sub">四川</div>
+                    <p>蚕丝绒手工制作，谐音"荣华"，千年宫廷头饰技艺的当代传承。</p>
+                    <div class="tag-group">
+                        <span class="tag">绒花制作</span>
+                        <span class="tag">省级非遗</span>
+                    </div>
+                    <a href="detail-ronghua.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/shuxiu2.jpg');"></div>
+                <div class="card-body">
+                    <h4>蜀绣</h4>
+                    <div class="sub">四川成都</div>
+                    <p>四大名绣之一，针法严谨、色彩明快，以芙蓉锦鲤、熊猫著称。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-shuxiu.html">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 南部地区 -->
+    <!-- ============================================================ -->
+    <div class="region-section" id="region-south">
+        <div class="region-title">
+            🌴 南部地区
+            <span class="badge">岭南风情 · 多彩民俗</span>
+            <span class="desc">｜粤绣、绣球、鱼灯、醒狮</span>
+        </div>
+        <div class="region-grid">
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/yuexiu3.jpg');"></div>
+                <div class="card-body">
+                    <h4>粤绣</h4>
+                    <div class="sub">广东</div>
+                    <p>四大名绣之一，色彩艳丽、构图饱满，以龙凤、花卉为常见题材。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-yuexiu.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/xiuqiu2.jpg');"></div>
+                <div class="card-body">
+                    <h4>壮族绣球</h4>
+                    <div class="sub">广西</div>
+                    <p>丝绸彩线刺绣而成，圆润精美，壮族青年男女传情达意的定情信物。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-xiuqiu.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/yudeng1.jpg');"></div>
+                <div class="card-body">
+                    <h4>民俗鱼灯</h4>
+                    <div class="sub">广东</div>
+                    <p>元宵传统灯彩，寓意年年有余、吉庆有余，承载岭南民俗记忆。</p>
+                    <div class="tag-group">
+                        <span class="tag">灯彩</span>
+                        <span class="tag">省级非遗</span>
+                    </div>
+                    <a href="detail-yudeng.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/xingshi2.jpg');"></div>
+                <div class="card-body">
+                    <h4>醒狮</h4>
+                    <div class="sub">广东</div>
+                    <p>南狮威武，腾挪闪扑采青纳福，岭南文化最具代表性的符号之一。</p>
+                    <div class="tag-group">
+                        <span class="tag">传统舞蹈</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-xingshi.html">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 北部地区 -->
+    <!-- ============================================================ -->
+    <div class="region-section" id="region-north">
+        <div class="region-title">
+            ❄️ 北部地区
+            <span class="badge">京畿大地 · 皇家气韵</span>
+            <span class="desc">｜京绣、泥人张、宫灯、皮影戏</span>
+        </div>
+        <div class="region-grid">
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/cixiu1.jpg');"></div>
+                <div class="card-body">
+                    <h4>京绣</h4>
+                    <div class="sub">北京</div>
+                    <p>燕京八绝之一，宫廷刺绣代表，针法严谨、配色华贵，尽显皇家气派。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-jingxiu.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/nisu2.jpg');"></div>
+                <div class="card-body">
+                    <h4>泥人张</h4>
+                    <div class="sub">天津</div>
+                    <p>百年世家，六代传承，"重在传神"，中国彩塑艺术的瑰宝。</p>
+                    <div class="tag-group">
+                        <span class="tag">泥塑</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-tianjingniren.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/gongdeng.jpg');"></div>
+                <div class="card-body">
+                    <h4>宫灯</h4>
+                    <div class="sub">北京</div>
+                    <p>精雕细琢、典雅华丽，凝聚宫廷审美与传统匠艺的照明瑰宝。</p>
+                    <div class="tag-group">
+                        <span class="tag">灯彩</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-gongdeng.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/piyingxi.jpg');"></div>
+                <div class="card-body">
+                    <h4>皮影戏</h4>
+                    <div class="sub">河北/陕西</div>
+                    <p>以兽皮刻制人物，灯影演绎千年故事，中国最早的"动画片"。</p>
+                    <div class="tag-group">
+                        <span class="tag">传统戏剧</span>
+                        <span class="tag">人类非遗</span>
+                    </div>
+                    <a href="detail-piyingxi.html">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 中部地区 -->
+    <!-- ============================================================ -->
+    <div class="region-section" id="region-central">
+        <div class="region-title">
+            🏮 中部地区
+            <span class="badge">中原腹地 · 华夏之源</span>
+            <span class="desc">｜湘绣、钧瓷、汝瓷、豫剧</span>
+        </div>
+        <div class="region-grid">
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/xiangxiu.jpg');"></div>
+                <div class="card-body">
+                    <h4>湘绣</h4>
+                    <div class="sub">湖南长沙</div>
+                    <p>四大名绣之一，以狮虎动物闻名，"绣花能生香、绣鸟能听声"。</p>
+                    <div class="tag-group">
+                        <span class="tag">刺绣</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-xiangxiu.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/junci.jpg');"></div>
+                <div class="card-body">
+                    <h4>钧瓷</h4>
+                    <div class="sub">河南禹州</div>
+                    <p>宋代五大名窑之一，"入窑一色，出窑万彩"，釉色变化无穷。</p>
+                    <div class="tag-group">
+                        <span class="tag">陶瓷</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-junci.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/ruci.jpg');"></div>
+                <div class="card-body">
+                    <h4>汝瓷</h4>
+                    <div class="sub">河南汝州</div>
+                    <p>宋代五大名窑之首，天青釉色温润如玉，"雨过天青云破处"之美誉。</p>
+                    <div class="tag-group">
+                        <span class="tag">陶瓷</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-ruci.html">查看详情</a>
+                </div>
+            </div>
+            <div class="region-card">
+                <div class="card-img" style="background-image:url('img/yuju.jpg');"></div>
+                <div class="card-body">
+                    <h4>豫剧</h4>
+                    <div class="sub">河南</div>
+                    <p>中国五大戏曲剧种之一，唱腔铿锵大气、抑扬有度，中原文化名片。</p>
+                    <div class="tag-group">
+                        <span class="tag">传统戏剧</span>
+                        <span class="tag">国家级非遗</span>
+                    </div>
+                    <a href="detail-yuju.html">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 底部五个方位导航 -->
+    <!-- ============================================================ -->
+    <div class="nav-grid">
+        <a href="#region-east" class="nav-item">
+            <span class="icon">🌅</span>
+            <div class="name">东部</div>
+            <div class="style">精雅灵秀</div>
+        </a>
+        <a href="#region-west" class="nav-item">
+            <span class="icon">🏔️</span>
+            <div class="name">西部</div>
+            <div class="style">古朴豪迈</div>
+        </a>
+        <a href="#region-south" class="nav-item">
+            <span class="icon">🌴</span>
+            <div class="name">南部</div>
+            <div class="style">多彩民俗</div>
+        </a>
+        <a href="#region-north" class="nav-item">
+            <span class="icon">❄️</span>
+            <div class="name">北部</div>
+            <div class="style">皇家气韵</div>
+        </a>
+        <a href="#region-central" class="nav-item">
+            <span class="icon">🏮</span>
+            <div class="name">中部</div>
+            <div class="style">华夏之源</div>
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

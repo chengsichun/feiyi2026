@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏联动 - 非遗跨界</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 8px 24px;
+            background: rgba(163, 168, 143, 0.12);
+            border-radius: 25px;
+            color: #7a7a6a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(163, 168, 143, 0.2);
+        }
+
+        /* 大背景容器 */
+        .game-story {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 40px 44px;
+            margin-bottom: 45px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .game-story .game-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.15);
+        }
+        .game-story .game-header .icon {
+            font-size: 32px;
+        }
+        .game-story .game-header .name {
+            font-size: 26px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 2px;
+        }
+        .game-story .game-header .count {
+            font-size: 13px;
+            color: #a3a88f;
+            margin-left: auto;
+            background: rgba(163, 168, 143, 0.1);
+            padding: 2px 16px;
+            border-radius: 20px;
+        }
+
+        .game-item {
+            display: flex;
+            gap: 32px;
+            padding: 28px 0;
+            border-bottom: 1px dashed rgba(200, 195, 188, 0.15);
+        }
+        .game-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .game-item .img-box {
+            flex-shrink: 0;
+            width: 240px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            color: #a3a88f;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+        }
+        .game-item .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .game-item .info {
+            flex: 1;
+        }
+        .game-item .info .brand-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .game-item .info h4 {
+            color: #7a7a6a;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .game-item .info .sub {
+            color: #a3a88f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .game-item .info .tag-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .game-item .info .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .game-item .info .tag-group .tag.hot {
+            background: #f9e6e6;
+            color: #c97a7a;
+        }
+        .game-item .info p {
+            color: #4a4a4a;
+            font-size: 14.5px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .game-item .info .meaning {
+            background: rgba(251, 245, 239, 0.6);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            font-size: 14px;
+            color: #6a6a5a;
+            line-height: 1.8;
+        }
+        .game-item .info .meaning strong {
+            color: #7a7a6a;
+        }
+
+        /* 左右交替 */
+        .game-item.reverse {
+            flex-direction: row-reverse;
+        }
+
+        @media screen and (max-width: 768px) {
+            .game-story {
+                padding: 20px 18px;
+            }
+            .game-item {
+                flex-direction: column !important;
+                padding: 20px 0;
+            }
+            .game-item .img-box {
+                width: 100%;
+                height: 180px;
+            }
+            .game-story .game-header .name {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <a href="liandong.html" class="back-link">← 返回联动首页</a>
+
+    <div class="hero-title">
+        <h1>🎮 游戏联动</h1>
+        <p>当非遗遇见虚拟世界 · 游戏IP与非遗的跨界对话</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        🎮 从《光与夜之恋》到《恋与深空》，从《原神》到《闪耀暖暖》……<br>
+        🌟 游戏正在用年轻人喜欢的方式，讲述非遗的故事。
+    </p>
+
+    <!-- ===== 大背景：光与夜之恋 ===== -->
+    <div class="game-story">
+        <div class="game-header">
+            <span class="icon">✨</span>
+            <span class="name">光与夜之恋</span>
+            <span class="count">4 个联动</span>
+        </div>
+
+        <!-- 齐司礼 × 绣球 -->
+        <div class="game-item">
+            <div class="img-box">
+                <img src="img/qisili.jpg" alt="齐司礼×广西绣球" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">光与夜之恋</span>
+                <h4>齐司礼 × 广西绣球 · 壮族绣球</h4>
+                <div class="sub">2024年七夕 · 广西文化和旅游厅联动</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 人气联动</span>
+                    <span class="tag">壮族绣球</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>2024年七夕，《光与夜之恋》与广西文化和旅游厅携手，邀请游戏男主齐司礼担任"清爽一夏·浪漫广西"特邀推荐官。联动以壮族绣球非遗技艺为核心，推出了绣球制作体验、广西文旅纪念文创等系列活动。玩家可以在游戏中感受壮族绣球的精美工艺，也可以在现实中前往广西体验非遗之美。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 游戏IP与地方文旅+非遗的深度融合，通过虚拟角色的号召力，让年轻玩家关注到壮族绣球这一国家级非遗。
+                </div>
+            </div>
+        </div>
+
+        <!-- 夏鸣星 × 苗银 -->
+        <div class="game-item reverse">
+            <div class="img-box">
+                <img src="img/xiamingxing.jpg" alt="夏鸣星×苗银" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">光与夜之恋</span>
+                <h4>夏鸣星 × 苗族银饰 · 苗银锻制技艺</h4>
+                <div class="sub">2023年夏鸣星生日 · 少数民族非遗联动</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 人气联动</span>
+                    <span class="tag">苗族银饰</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>2023年夏鸣星生日期间，《光与夜之恋》与少数民族非遗联动，以苗银为核心。夏鸣星的生日卡面融入苗族银饰元素，游戏剧情结合了苗族银饰的锻造技艺和文化内涵。联动还同步推出了土家织锦、水族水书、侗族蓝靛靛染等多个少数民族非遗项目。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 将苗族银饰等少数民族非遗与游戏角色的生日节点深度绑定，通过"角色+非遗"的情感连接，让玩家了解和尊重少数民族文化的多样性。
+                </div>
+            </div>
+        </div>
+
+        <!-- 齐司礼 × 故宫以东 -->
+        <div class="game-item">
+            <div class="img-box">
+                <img src="img/qisili2.jpg" alt="齐司礼×故宫以东" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">光与夜之恋</span>
+                <h4>齐司礼 × 故宫以东 · 京绣·景泰蓝·汝瓷</h4>
+                <div class="sub">2022年齐司礼生日 · 北京东城文旅联动</div>
+                <div class="tag-group">
+                    <span class="tag">京绣</span>
+                    <span class="tag">景泰蓝</span>
+                    <span class="tag">汝瓷</span>
+                </div>
+                <p>2022年齐司礼生日，《光与夜之恋》与北京东城区文旅品牌"故宫以东"跨界联动。玩家跟随齐司礼漫步北京东城古迹，感受景泰蓝、京绣、泰山皮影、汝瓷、北京玉雕等国家级非遗项目。这些非遗大师作品影像随后参展了法国巴黎卢浮宫卡鲁塞尔厅的全球当代艺术博览会。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> "数字IP+非遗+世界级展览"的模式，让中国非遗被全球Z世代看见，实现了文化出海。
+                </div>
+            </div>
+        </div>
+
+        <!-- 苏绣婚书 -->
+        <div class="game-item reverse">
+            <div class="img-box">
+                <img src="img/hunshu.jpg" alt="光与夜之恋×苏绣" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">光与夜之恋</span>
+                <h4>光与夜之恋 × 苏州丝绸博物馆 · 苏绣婚书</h4>
+                <div class="sub">2025年 · "灼灼金帐栖"活动</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">苏绣</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>2025年8月，《光与夜之恋》"灼灼金帐栖"活动邀请中国工艺美术大师、苏绣非遗传承人邹英姿为游戏定制非遗婚书刺绣。将苏绣婚书这一传统婚俗元素融入游戏剧情，让玩家在虚拟婚礼中感受苏绣的典雅与庄重。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 以"情感消费"驱动非遗认知，让玩家在游戏剧情中自然接受苏绣文化的熏陶。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 大背景：恋与深空 ===== -->
+    <div class="game-story">
+        <div class="game-header">
+            <span class="icon">🌌</span>
+            <span class="name">恋与深空</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <!-- 恋与深空 × 簪花 -->
+        <div class="game-item">
+            <div class="img-box">
+                <img src="img/xiayizhou.jpg" alt="恋与深空×泉州簪花" onerror="this.parentElement.innerHTML='🌸'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">恋与深空</span>
+                <h4>恋与深空 × 泉州蟳埔 · 簪花围</h4>
+                <div class="sub">2025年 · 非遗联动</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">泉州簪花</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>《恋与深空》与泉州蟳埔簪花非遗传承人合作，将泉州簪花围这一国家级非遗融入游戏角色造型。游戏内推出了簪花主题角色装扮，玩家可为角色佩戴精美的簪花头饰。游戏外同步推出簪花非遗纪录片，记录传承人黄丽泳老师的故事，让玩家在游戏内外都能感受簪花文化的魅力。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 游戏与非遗的深度绑定，让泉州蟳埔簪花这一非遗技艺被全球玩家看见，带动了簪花文化的年轻化传播。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 大背景：原神 ===== -->
+    <div class="game-story">
+        <div class="game-header">
+            <span class="icon">⚔️</span>
+            <span class="name">原神</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <!-- 原神 × 非遗系列 -->
+        <div class="game-item">
+            <div class="img-box">
+                <img src="img/yuanshen.jpg" alt="原神×非遗" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">原神</span>
+                <h4>原神 × 徽墨·龙泉青瓷·苏绣·木版年画</h4>
+                <div class="sub">2022-2025年 · 长期非遗合作</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">徽墨</span>
+                    <span class="tag">龙泉青瓷</span>
+                    <span class="tag">苏绣</span>
+                </div>
+                <p>《原神》长期致力于非遗文化的传播，先后与徽墨、龙泉青瓷、苏绣、木版年画等多个非遗项目合作。游戏通过角色设计、场景美术、周边产品等方式，将非遗元素融入游戏世界。以"海灯节"为背景的璃月地区场景，大量参考了中国传统建筑和民俗文化，在海内外玩家中产生了深远影响。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 作为全球现象级游戏，《原神》让全球数亿玩家在游戏过程中自然接触中国非遗，实现了非遗文化的国际化传播。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 大背景：闪耀暖暖 ===== -->
+    <div class="game-story">
+        <div class="game-header">
+            <span class="icon">👗</span>
+            <span class="name">闪耀暖暖</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <!-- 闪耀暖暖 × 云锦 -->
+        <div class="game-item">
+            <div class="img-box">
+                <img src="img/sunuannuan.jpg" alt="闪耀暖暖×云锦" onerror="this.parentElement.innerHTML='👗'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">闪耀暖暖</span>
+                <h4>闪耀暖暖 × 南京云锦 · 皇室织造技艺</h4>
+                <div class="sub">2025年 · 非遗联动</div>
+                <div class="tag-group">
+                    <span class="tag">南京云锦</span>
+                    <span class="tag">人类非遗</span>
+                </div>
+                <p>《闪耀暖暖》与南京云锦非遗传承人合作，将云锦"寸锦寸金"的织造技艺融入游戏服装设计。游戏内推出云锦主题套装，以云锦经典的龙凤纹、花卉纹为灵感，结合游戏精致的3D建模，让玩家近距离感受云锦的华美与精湛。联动还推出了云锦科普内容，介绍云锦的织造工序和历史渊源。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 换装游戏与非遗服饰的天然契合，让玩家在搭配服装的过程中自然接触南京云锦这一人类非遗代表作。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0 40px;">
+        <a href="liandong.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">← 返回联动首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>关于本站 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-section {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 38px 42px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(200, 195, 188, 0.25);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+        .about-section h2 {
+            color: #7a7a6a;
+            font-size: 22px;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.2);
+        }
+        .about-section p {
+            color: #4a4a4a;
+            font-size: 15px;
+            line-height: 2;
+            text-indent: 2em;
+            margin: 12px 0 6px;
+        }
+        .about-section ul {
+            padding-left: 30px;
+            margin: 10px 0 6px;
+        }
+        .about-section ul li {
+            color: #4a4a4a;
+            font-size: 15px;
+            line-height: 2.2;
+            list-style: disc;
+        }
+        .about-section ul li strong {
+            color: #7a7a6a;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 15px 0 5px;
+        }
+        .about-grid .item {
+            background: rgba(251, 245, 239, 0.6);
+            border-radius: 10px;
+            padding: 18px 22px;
+            border-left: 4px solid #a3a88f;
+        }
+        .about-grid .item h4 {
+            color: #7a7a6a;
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .about-grid .item p {
+            color: #6a6a5a;
+            font-size: 14px;
+            line-height: 1.8;
+            text-indent: 0;
+            margin: 0;
+        }
+        .values-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 15px 0 5px;
+        }
+        .values-box .val {
+            text-align: center;
+            background: rgba(251, 245, 239, 0.6);
+            border-radius: 10px;
+            padding: 20px 12px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+        }
+        .values-box .val .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .values-box .val .name {
+            color: #7a7a6a;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .values-box .val .desc {
+            color: #a3a88f;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .highlight-quote {
+            margin-top: 12px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            text-indent: 0;
+            color: #7a7a6a;
+            font-weight: 500;
+            background: rgba(251, 245, 239, 0.6);
+        }
+        @media screen and (max-width: 768px) {
+            .about-section {
+                padding: 24px 18px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .values-box {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>关于本站</h1>
+        <p>守护非遗文脉 · 传承千年匠心</p>
+        <div class="split-line"></div>
+    </div>
+
+    <!-- ===== 建站初衷 ===== -->
+    <div class="about-section">
+        <h2>🎯 建站初衷</h2>
+        <p>非物质文化遗产是中华民族悠久历史和灿烂文明的活态见证，承载着世代相传的智慧、技艺与精神。然而，在全球化与现代化的浪潮中，许多珍贵的非遗项目正面临传承断代、技艺失传的严峻挑战。传统手工艺后继乏人，民俗活动逐渐淡化，年轻一代对本土文化的认知日益疏远——这些问题让我们深感忧思。</p>
+        <p>本网站的创建，正是基于一份守护文化根脉的初心。我们希望通过搭建一个集展示、科普、记录、互动于一体的非遗文化平台，让更多人了解非遗、走近非遗、爱上非遗。我们相信，每一份关注都是一次守护，每一次传播都是一份力量。只有让非遗活在当下、融入生活，才能真正实现活态传承。</p>
+        <p>我们以"守护非遗文脉，传承千年匠心"为宗旨，致力于用数字化的方式为非遗保护事业贡献一份力量。</p>
+    </div>
+
+    <!-- ===== 核心理念 ===== -->
+    <div class="about-section">
+        <h2>💎 核心理念</h2>
+        <div class="values-box">
+            <div class="val">
+                <span class="icon">📖</span>
+                <div class="name">记录</div>
+                <div class="desc">忠实记录非遗技艺与传承人故事</div>
+            </div>
+            <div class="val">
+                <span class="icon">📢</span>
+                <div class="name">传播</div>
+                <div class="desc">广泛传播非遗文化与保护理念</div>
+            </div>
+            <div class="val">
+                <span class="icon">🤝</span>
+                <div class="name">连接</div>
+                <div class="desc">连接传承人与公众的桥梁</div>
+            </div>
+            <div class="val">
+                <span class="icon">🌱</span>
+                <div class="name">传承</div>
+                <div class="desc">推动非遗在当代的活态传承</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 网站内容 ===== -->
+    <div class="about-section">
+        <h2>📚 网站内容</h2>
+        <p>本站围绕非物质文化遗产的核心价值，精心设置了以下内容板块：</p>
+        <div class="about-grid">
+            <div class="item">
+                <h4>🏠 非遗首页</h4>
+                <p>集中展示非遗分类、匠人推荐、特色非遗精选，快速了解网站精华内容。</p>
+            </div>
+            <div class="item">
+                <h4>📖 非遗浏览</h4>
+                <p>按类别浏览各项国家级、省级非物质文化遗产项目，了解其基本信息和艺术特色。</p>
+            </div>
+            <div class="item">
+                <h4>🧠 非遗科普</h4>
+                <p>系统介绍非遗的定义、分类体系、保护意义、传承现状等基础知识，提升公众非遗认知。</p>
+            </div>
+            <div class="item">
+                <h4>👤 传承人纪实</h4>
+                <p>深度记录非遗传承人的从艺经历、代表作品和传承贡献，致敬守艺人。</p>
+            </div>
+            <div class="item">
+                <h4>📅 非遗活动</h4>
+                <p>发布线上线下非遗活动资讯，涵盖体验工坊、展览、直播、讲座等多种形式。</p>
+            </div>
+            <div class="item">
+                <h4>💬 留言互动</h4>
+                <p>开放用户留言交流平台，欢迎分享非遗体验、建言献策、交流心得。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 价值主张 ===== -->
+    <div class="about-section">
+        <h2>🌟 我们的愿景</h2>
+        <p>非遗保护是一项长期而艰巨的文化事业，需要政府、传承人、社会各界的共同参与。作为文化传播者，我们希望通过这个平台实现以下愿景：</p>
+        <ul>
+            <li><strong>唤醒文化自觉：</strong>让更多人认识到非遗的文化价值和精神内涵，增强文化自信与认同感。</li>
+            <li><strong>搭建传承桥梁：</strong>为非遗传承人与公众之间搭建沟通互动的桥梁，推动非遗走进大众生活。</li>
+            <li><strong>记录时代记忆：</strong>用文字和影像记录传承人的守艺故事，为后世留下珍贵的文化档案。</li>
+            <li><strong>激发年轻活力：</strong>以符合当代审美的表达方式吸引年轻人关注非遗，为非遗传承注入新鲜血液。</li>
+        </ul>
+    </div>
+
+    <!-- ===== 非遗的价值 ===== -->
+    <div class="about-section">
+        <h2>🏛️ 非遗保护的意义</h2>
+        <p>非物质文化遗产是一个民族的文化基因和精神标识。每一门技艺、每一种民俗、每一段曲艺，都凝聚着先人的智慧与情感，承载着地域的风土与人情。保护非遗，就是保护文化的多样性，守护民族的精神家园。</p>
+        <ul>
+            <li><strong>历史价值：</strong>非遗是"活态的历史"，记录了人类文明的发展历程和生产生活方式的变迁。</li>
+            <li><strong>文化认同：</strong>非遗是民族身份和文化认同的重要基础，承载着民族的集体记忆和精神内核。</li>
+            <li><strong>审美价值：</strong>非遗蕴含独特的审美观念和艺术创造力，是世界文化多样性的重要体现。</li>
+            <li><strong>社会价值：</strong>非遗凝聚社会共识和民族情感，是增强文化自信和民族自豪感的重要源泉。</li>
+        </ul>
+        <div class="highlight-quote">
+            🌱 非遗保护，是一场与时间的赛跑。我们愿做这场赛跑中的同行者。
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

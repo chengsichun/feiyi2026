@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>非遗联动 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .category-list {
+            max-width: 1200px;
+            margin: 30px auto 50px;
+        }
+        .category-row {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 20px;
+            padding: 24px 40px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(200, 195, 188, 0.18);
+            transition: all 0.35s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .category-row:hover {
+            transform: translateX(8px) scale(1.005);
+            box-shadow: 0 8px 32px rgba(163, 168, 143, 0.15);
+            border-color: #a3a88f;
+        }
+
+        /* 正方形图片位 */
+        .category-row .img-slot {
+            flex-shrink: 0;
+            width: 140px;
+            height: 140px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #b8bda3;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+            transition: all 0.3s;
+        }
+        .category-row:hover .img-slot {
+            transform: scale(1.04);
+        }
+        .category-row .img-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-row .info {
+            flex: 1;
+        }
+        .category-row .info .name {
+            font-size: 26px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .category-row .info .name .emoji-big {
+            font-size: 28px;
+        }
+        .category-row .info .desc {
+            font-size: 15px;
+            color: #a3a88f;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+        .category-row .info .poem {
+            font-size: 14px;
+            color: #c8cdb8;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-top: 6px;
+            font-family: "楷体", "KaiTi", serif;
+        }
+
+        /* 右侧小装饰 */
+        .category-row .side-deco {
+            flex-shrink: 0;
+            font-size: 30px;
+            opacity: 0.12;
+            transition: all 0.4s;
+            font-family: "楷体", serif;
+            color: #7a7a6a;
+            letter-spacing: 3px;
+            writing-mode: vertical-rl;
+            padding: 4px 0;
+        }
+        .category-row:hover .side-deco {
+            opacity: 0.3;
+            transform: scale(1.05);
+        }
+
+        /* 可爱小点缀 */
+        .category-row .doodle {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0.05;
+            pointer-events: none;
+            font-family: "楷体", serif;
+            color: #7a7a6a;
+        }
+        .category-row .doodle-1 { top: 6px; right: 50px; }
+        .category-row .doodle-2 { bottom: 6px; left: 30px; }
+        .category-row .doodle-3 { top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 90px; opacity: 0.025; }
+
+        /* 左右交替 */
+        .category-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* 装饰圆点 */
+        .category-row .deco {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(163, 168, 143, 0.03);
+            pointer-events: none;
+        }
+        .category-row .deco-1 { width: 160px; height: 160px; top: -60px; right: -50px; }
+        .category-row .deco-2 { width: 80px; height: 80px; bottom: -30px; left: -30px; }
+
+        @media screen and (max-width: 768px) {
+            .category-row {
+                padding: 18px 22px;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .category-row .img-slot {
+                width: 100px;
+                height: 100px;
+                font-size: 34px;
+            }
+            .category-row .info .name { font-size: 20px; }
+            .category-row .info .desc { font-size: 13.5px; }
+            .category-row .info .poem { font-size: 12.5px; }
+            .category-row .side-deco { font-size: 20px; }
+            .category-row.reverse { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>🎭 非遗跨界联动</h1>
+        <p>当千年非遗遇见现代生活 · 六大领域跨界联名</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        ✨ 非遗不再遥远。它走进了游戏、奶茶、餐厅、服装、高奢、美妆……<br>
+        🌱 点击分类，探索非遗的另一种打开方式。
+    </p>
+
+    <div class="category-list">
+
+        <!-- 1. 游戏联动 -->
+        <a href="detail-youxi.html" class="category-row">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">🎮</span>
+            <div class="img-slot">
+                <img src="img/qisili.jpg" alt="游戏联动" onerror="this.parentElement.innerHTML='🎮'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">🎮</span> 游戏联动</div>
+                <div class="desc">当非遗遇见虚拟世界 · 跨越次元的文化对话</div>
+                <div class="poem">「 一 念 江 湖 远 ， 千 年 匠 心 传 」</div>
+            </div>
+            <span class="side-deco">游·戏</span>
+        </a>
+
+        <!-- 2. 饮品联动 -->
+        <a href="detail-yingliao.html" class="category-row reverse">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">🧋</span>
+            <div class="img-slot">
+                <img src="img/bawangchaji.jpg" alt="饮品联动" onerror="this.parentElement.innerHTML='🧋'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">🧋</span> 饮品联动</div>
+                <div class="desc">一杯奶茶里的非遗 · 唇齿间的文化温度</div>
+                <div class="poem">「 一 盏 清 欢 味 ， 千 年 手 作 香 」</div>
+            </div>
+            <span class="side-deco">茶·饮</span>
+        </a>
+
+        <!-- 3. 餐厅联动 -->
+        <a href="detai-canting.html" class="category-row">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">🍽️</span>
+            <div class="img-slot">
+                <img src="img/xingbake.jpg" alt="餐厅联动" onerror="this.parentElement.innerHTML='🍽️'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">🍽️</span> 餐厅联动</div>
+                <div class="desc">舌尖上的非遗跨界 · 一餐一饭皆有故事</div>
+                <div class="poem">「 人 间 烟 火 气 ， 最 抚 凡 人 心 」</div>
+            </div>
+            <span class="side-deco">餐·饮</span>
+        </a>
+
+        <!-- 4. 服装联动 -->
+        <a href="detail-fuzhuang.html" class="category-row reverse">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">👗</span>
+            <div class="img-slot">
+                <img src="img/zhongguolining.jpg" alt="服装联动" onerror="this.parentElement.innerHTML='👗'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">👗</span> 服装联动</div>
+                <div class="desc">非遗走上国际T台 · 针线间的东方美学</div>
+                <div class="poem">「 裁 云 剪 水 成 衣 裳 ， 一 针 一 线 绣 乾 坤 」</div>
+            </div>
+            <span class="side-deco">衣·裳</span>
+        </a>
+
+        <!-- 5. 高奢联动 -->
+        <a href="detail-gaoshe.html" class="category-row">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">💎</span>
+            <div class="img-slot">
+                <img src="img/dior.zhidiao.jpg" alt="高奢联动" onerror="this.parentElement.innerHTML='💎'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">💎</span> 高奢联动</div>
+                <div class="desc">顶级品牌与非遗对话 · 匠心跨越国界</div>
+                <div class="poem">「 金 风 玉 露 一 相 逢 ， 便 胜 却 人 间 无 数 」</div>
+            </div>
+            <span class="side-deco">奢·华</span>
+        </a>
+
+        <!-- 6. 美妆联动 -->
+        <a href="detail-meizhuang.html" class="category-row reverse">
+            <span class="deco deco-1"></span>
+            <span class="deco deco-2"></span>
+            <span class="doodle doodle-1">✦ ✦ ✦</span>
+            <span class="doodle doodle-2">✧ ✧ ✧</span>
+            <span class="doodle doodle-3">💄</span>
+            <div class="img-slot">
+                <img src="img/huaxizi.miaoyin.jpg" alt="美妆联动" onerror="this.parentElement.innerHTML='💄'">
+            </div>
+            <div class="info">
+                <div class="name"><span class="emoji-big">💄</span> 美妆联动</div>
+                <div class="desc">非遗元素的美学表达 · 妆点东方之美</div>
+                <div class="poem">「 朱 唇 一 点 桃 花 面 ， 黛 眉 半 扫 柳 叶 弯 」</div>
+            </div>
+            <span class="side-deco">妆·容</span>
+        </a>
+
+    </div>
+
+    <div style="text-align:center;margin:10px 0 30px;">
+        <a href="index.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">🏠 返回首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

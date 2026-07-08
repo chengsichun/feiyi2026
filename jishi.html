@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>传承人纪实 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+       .master-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+    margin: 20px 0 50px;
+}
+
+.master-card {
+    background: rgba(251, 245, 239, 0.92);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(163, 168, 143, 0.08);
+    border: 1px solid rgba(200, 195, 188, 0.25);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.master-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 32px rgba(163, 168, 143, 0.16);
+}
+
+.master-img {
+    width: 100%;
+    height: 340px;
+    background-size: cover;
+    background-position: center;
+    background-color: #ece5dc;
+    flex-shrink: 0;
+}
+
+.master-body {
+    padding: 28px 30px 34px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.master-body h2 {
+    color: #7a7a6a;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+}
+
+.master-body .subtitle {
+    color: #a3a88f;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.master-body .tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 16px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    align-self: flex-start;
+}
+
+.master-body p {
+    color: #4a4a4a;
+    font-size: 14.5px;
+    line-height: 1.9;
+    margin-bottom: 12px;
+    text-indent: 2em;
+    flex: 1;
+}
+
+.master-body .quote {
+    background: rgba(251, 245, 239, 0.6);
+    padding: 14px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #a3a88f;
+    font-style: italic;
+    color: #7a7a6a;
+    font-size: 14px;
+    text-indent: 0;
+    margin-bottom: 12px;
+}
+
+.master-body .work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.master-body .work-tags span {
+    background: rgba(200, 195, 188, 0.15);
+    padding: 3px 14px;
+    border-radius: 16px;
+    font-size: 12px;
+    color: #7a7a6a;
+}
+
+.master-body .btn-detail {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 24px;
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border-radius: 25px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: all 0.3s;
+}
+
+.master-body .btn-detail:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+}
+
+@media screen and (max-width: 768px) {
+    .master-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .master-img {
+        height: 220px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+        <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>传承人纪实</h1>
+        <p>守艺传承 · 匠心永恒</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#557777;font-size:16px;margin-bottom:20px;letter-spacing:2px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        他们是一群沉默的守望者，用一生的时光守护着千年技艺的温度。<br>
+        在这里，记录他们的故事，致敬他们的坚守。
+    </p>
+
+    <div class="master-grid">
+
+        <!-- ===== 陈英华 ===== -->
+        <div class="master-card">
+            <div class="master-img" style="background-image: url('img/chenyinghua.jpg');"></div>
+            <div class="master-body">
+                <h2>陈英华</h2>
+                <span class="subtitle">苏绣国家级非遗传承人</span>
+                <span class="tag">从业42年</span>
+                <p>1964年生于苏州刺绣世家，18岁进入苏州刺绣研究所，师从中国工艺美术大师任嘒闲先生。四十余年来致力于苏绣传承与创新，双面绣作品《猫》《金鱼》被誉为"针尖上的奇迹"，乱针绣《水乡》《荷花》开创苏绣新境界。2008年被评为国家级非遗传承人，2020年获"中国工艺美术大师"称号。</p>
+                <div class="quote">"一根针，一缕线，绣的是花鸟鱼虫，守的是千年匠心。"</div>
+                <div class="work-tags">
+                    <span>双面绣《猫》</span>
+                    <span>双面绣《金鱼》</span>
+                    <span>乱针绣《水乡》</span>
+                    <span>乱针绣《荷花》</span>
+                </div>
+                <a href="detail-chenyinghua.html" class="btn-detail">查看完整故事</a>
+            </div>
+        </div>
+
+        <!-- ===== 张宇 ===== -->
+        <div class="master-card">
+            <div class="master-img" style="background-image: url('img/zhangyu.jpg');"></div>
+            <div class="master-body">
+                <h2>张宇</h2>
+                <span class="subtitle">泥人张第六代传人</span>
+                <span class="tag">百年世家 · 第六代</span>
+                <p>1978年生于天津，"泥人张"世家第六代传人。自幼随父亲张乃英学习泥塑技艺，秉承"重在传神"的家族理念。代表作《钟馗嫁妹》系列获中国民间文艺"山花奖"金奖，《红楼梦》人物系列将文学经典转化为立体艺术。2021年被评为天津市非遗传承人，正筹建"泥人张数字博物馆"。</p>
+                <div class="quote">"泥人张传的不只是手艺，更是一种'以形写神'的东方美学。"</div>
+                <div class="work-tags">
+                    <span>《钟馗嫁妹》系列</span>
+                    <span>《红楼梦》人物系列</span>
+                    <span>《市井百态》系列</span>
+                </div>
+                <a href="detail-zhangyu.html" class="btn-detail">查看完整故事</a>
+            </div>
+        </div>
+
+        <!-- ===== 周红 ===== -->
+        <div class="master-card">
+            <div class="master-img" style="background-image: url('img/zhouhong.jpg');"></div>
+            <div class="master-body">
+                <h2>周红</h2>
+                <span class="subtitle">苏州评弹省级非遗传承人</span>
+                <span class="tag">从艺38年</span>
+                <p>1968年生于苏州评弹世家，16岁考入苏州评弹学校，师从评弹名家邢晏芝先生。嗓音清亮婉转，擅长"蒋调""俞调"，代表曲目《玉蜻蜓》《珍珠塔》深受喜爱。2012年被评为江苏省级非遗传承人，2016年在上海大剧院举办专场演出，2019年赴巴黎联合国教科文组织总部展演。</p>
+                <div class="quote">"评弹是江南文化的魂，一把三弦、一柄琵琶，说的不只是故事。"</div>
+                <div class="work-tags">
+                    <span>《玉蜻蜓》</span>
+                    <span>《珍珠塔》</span>
+                    <span>《白蛇传·断桥》</span>
+                    <span>《苏州好风光》</span>
+                </div>
+                <a href="detail-zhouhong.html" class="btn-detail">查看完整故事</a>
+            </div>
+        </div>
+
+        <!-- ===== 李月爱 ===== -->
+        <div class="master-card">
+            <div class="master-img" style="background-image: url('img/liyueai.jpg');"></div>
+            <div class="master-body">
+                <h2>李月爱</h2>
+                <span class="subtitle">民间剪纸省级非遗传承人</span>
+                <span class="tag">从艺50年</span>
+                <p>1955年生于陕西延安，5岁随祖母学习剪纸，50年来以一把剪刀、一方红纸剪出数千幅作品。风格粗犷豪放、古朴稚拙，代表作《十二生肖》《百福图》充满黄土高原气息。2009年被评为陕西省级非遗传承人，2022年《百福图》被中国国家博物馆收藏。</p>
+                <div class="quote">"剪纸不用打草稿，心里有什么就剪什么。剪的是纸，说的是心里话。"</div>
+                <div class="work-tags">
+                    <span>《十二生肖》</span>
+                    <span>《百福图》</span>
+                    <span>《陕北民歌》系列</span>
+                    <span>《黄土高坡》系列</span>
+                </div>
+                <a href="detail-liyueai.html" class="btn-detail">查看完整故事</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 底部寄语 ===== -->
+  <!-- ===== 底部寄语 ===== -->
+<div style="text-align:center;padding:40px 30px;background:rgba(251,245,239,0.6);border-radius:16px;border:1px solid rgba(200,195,188,0.25);margin:10px 0 30px;">
+    <p style="color:#7a7a6a;font-size:18px;letter-spacing:3px;line-height:2;">
+        "每一种非遗技艺的背后，都有一群默默坚守的人。<br>
+        他们用一生的时光，守护着中华民族的文化根脉。<br>
+        致敬每一位传承人。"
+    </p>
+    <div class="split-line"></div>
+    <p style="color:#a3a88f;font-size:14px;letter-spacing:1px;">
+        中华非遗文化传承网 · 传承人纪实栏目
+    </p>
+</div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

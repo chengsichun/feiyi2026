@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>高奢联动 - 非遗跨界</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 8px 24px;
+            background: rgba(163, 168, 143, 0.12);
+            border-radius: 25px;
+            color: #7a7a6a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(163, 168, 143, 0.2);
+        }
+
+        .story-box {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .story-box .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.12);
+        }
+        .story-box .header .icon { font-size: 30px; }
+        .story-box .header .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 2px;
+        }
+        .story-box .header .count {
+            font-size: 13px;
+            color: #a3a88f;
+            margin-left: auto;
+            background: rgba(163, 168, 143, 0.1);
+            padding: 2px 16px;
+            border-radius: 20px;
+        }
+
+        .item {
+            display: flex;
+            gap: 30px;
+            padding: 26px 0;
+            border-bottom: 1px dashed rgba(200, 195, 188, 0.12);
+        }
+        .item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .item .img-box {
+            flex-shrink: 0;
+            width: 230px;
+            height: 190px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            color: #a3a88f;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+        }
+        .item .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item .info { flex: 1; }
+        .item .info .brand-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .item .info h4 {
+            color: #7a7a6a;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .item .info .sub {
+            color: #a3a88f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .item .info .tag-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .item .info .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .item .info .tag-group .tag.hot {
+            background: #f9e6e6;
+            color: #c97a7a;
+        }
+        .item .info p {
+            color: #4a4a4a;
+            font-size: 14.5px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .item .info .meaning {
+            background: rgba(251, 245, 239, 0.6);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            font-size: 14px;
+            color: #6a6a5a;
+            line-height: 1.8;
+        }
+        .item .info .meaning strong { color: #7a7a6a; }
+
+        .item.reverse { flex-direction: row-reverse; }
+
+        @media screen and (max-width: 768px) {
+            .story-box { padding: 20px 16px; }
+            .item { flex-direction: column !important; padding: 18px 0; }
+            .item .img-box { width: 100%; height: 160px; }
+            .story-box .header .name { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <a href="liandong.html" class="back-link">← 返回联动首页</a>
+
+    <div class="hero-title">
+        <h1>💎 高奢联动</h1>
+        <p>顶级品牌与非遗对话 · 匠心跨越国界</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        💎 从DIOR到爱马仕，从LV到宝格丽……<br>
+        ✨ 国际奢侈品牌正在与中国非遗展开深度对话。
+    </p>
+
+        <!-- ===== DIOR ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">💎</span>
+            <span class="name">DIOR</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/dior.zhidiao.jpg" alt="DIOR×纸雕" onerror="this.parentElement.innerHTML='💎'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">DIOR</span>
+                <h4>DIOR × 纸雕艺术 · 破茧成蝶</h4>
+                <div class="sub">2024年 · 台北华山1914文创园区</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">纸雕</span>
+                    <span class="tag">国际品牌</span>
+                </div>
+                <p>2024年，DIOR在台北华山1914文化创意产业园举办早春度假系列发表会，邀请知名剪纸艺术家陈彦廷以墨西哥异国文化为灵感，运用精细的剪刻技法，创作了蝴蝶破茧蜕变的纸雕意象，象征着女性寻求自由和独立的坚韧精神。此次早春度假女装系列贯穿了象征蜕变和自由的“蝴蝶”主题，无论是服装上的珠饰刺绣、蕾丝编织，还是激光切割皮革等配件，蝴蝶都被幻化为全新的品牌图腾意象，宛如破茧重生[citation:11]。此外，DIOR还与纸艺艺术家温秋雯合作，将其纸艺花灯作品融入DIOR门店圣诞橱窗设计，以精致造型和细腻工艺为品牌增添东方韵味。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 纸雕艺术与DIOR高定设计的跨界融合，让中国传统纸雕技艺以当代艺术的形式登上国际时尚舞台，展现了非遗工艺在时尚领域的无限可能。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 爱马仕 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">💎</span>
+            <span class="name">爱马仕</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/aimashi.ronghua.jpg" alt="爱马仕×非遗" onerror="this.parentElement.innerHTML='💎'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">爱马仕</span>
+                <h4>爱马仕 × 中国非遗 · 丝巾系列</h4>
+                <div class="sub">2023年 · 中国限定</div>
+                <div class="tag-group">
+                    <span class="tag">爱马仕</span>
+                    <span class="tag">丝巾</span>
+                    <span class="tag">非遗元素</span>
+                </div>
+                <p>爱马仕在中国市场推出非遗主题丝巾系列，将中国非遗元素融入丝巾设计。图案灵感来源于中国传统刺绣、剪纸、陶瓷等非遗工艺，结合爱马仕标志性的丝巾工艺，打造出兼具东方韵味与法式优雅的作品。该系列在中国市场限量发售，受到消费者追捧。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 国际奢侈品牌以非遗为灵感进行产品设计，让中国非遗以奢侈品的形式进入全球视野，提升了非遗的商业价值和文化影响力。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0 40px;">
+        <a href="liandong.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">← 返回联动首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

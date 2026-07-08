@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>检索查询 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      .search-section {
+    max-width: 950px;
+    margin: 0 auto 40px;
+}
+.search-box {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0 16px;
+}
+.search-box input {
+    flex: 1;
+    padding: 14px 22px;
+    border: 2px solid #d9d0c8;
+    border-radius: 30px;
+    font-size: 16px;
+    background: #faf3ec;
+    transition: border 0.3s;
+}
+.search-box input:focus {
+    border-color: #a3a88f;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(163, 168, 143, 0.15);
+}
+.search-box button {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.search-box button:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+}
+
+.hot-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 20px;
+    justify-content: center;
+}
+.hot-tags .tag {
+    padding: 6px 18px;
+    background: rgba(200, 195, 188, 0.15);
+    border-radius: 20px;
+    font-size: 13px;
+    color: #7a7a6a;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+.hot-tags .tag:hover {
+    background: #a3a88f;
+    color: #fff;
+    border-color: #a3a88f;
+}
+
+.result-area {
+    margin-top: 25px;
+}
+.result-area .result-item {
+    background: rgba(251, 245, 239, 0.92);
+    padding: 18px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(200, 195, 188, 0.25);
+    margin-bottom: 12px;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.result-area .result-item:hover {
+    box-shadow: 0 4px 20px rgba(163, 168, 143, 0.12);
+    transform: translateY(-2px);
+}
+.result-area .result-item .info h4 {
+    color: #7a7a6a;
+    font-size: 17px;
+    margin-bottom: 2px;
+}
+.result-area .result-item .info .desc {
+    color: #6a6a5a;
+    font-size: 14px;
+}
+.result-area .result-item .info .tag-group {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+.result-area .result-item .info .tag-group .rtag {
+    font-size: 11px;
+    padding: 1px 12px;
+    background: rgba(200, 195, 188, 0.15);
+    border-radius: 20px;
+    color: #7a7a6a;
+}
+.result-area .result-item .link {
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+.result-area .result-item .link a {
+    padding: 5px 18px;
+    border: 1px solid rgba(163, 168, 143, 0.3);
+    border-radius: 20px;
+    font-size: 13px;
+    color: #7a7a6a;
+    text-decoration: none;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+.result-area .result-item .link a:hover {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border-color: #a3a88f;
+}
+
+.no-result {
+    text-align: center;
+    padding: 40px 20px;
+    color: #b8bda3;
+}
+.no-result .icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 10px;
+}
+.result-count {
+    color: #a3a88f;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.recommend-section {
+    margin: 35px 0 20px;
+}
+.recommend-section .rec-title {
+    font-size: 20px;
+    color: #7a7a6a;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.recommend-section .rec-title small {
+    font-size: 14px;
+    color: #a3a88f;
+    font-weight: 400;
+}
+.rec-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+.rec-grid .rec-item {
+    background: rgba(251, 245, 239, 0.92);
+    border-radius: 12px;
+    padding: 16px 18px 18px;
+    border: 1px solid rgba(200, 195, 188, 0.25);
+    transition: all 0.3s;
+    text-align: center;
+}
+.rec-grid .rec-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(163, 168, 143, 0.14);
+    border-color: #a3a88f;
+}
+.rec-grid .rec-item .icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 4px;
+}
+.rec-grid .rec-item h5 {
+    color: #7a7a6a;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+.rec-grid .rec-item .rec-tags {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 6px 0 10px;
+}
+.rec-grid .rec-item .rec-tags span {
+    font-size: 10px;
+    padding: 1px 10px;
+    background: rgba(200, 195, 188, 0.15);
+    border-radius: 20px;
+    color: #a3a88f;
+}
+.rec-grid .rec-item a {
+    display: inline-block;
+    padding: 4px 16px;
+    border: 1px solid rgba(163, 168, 143, 0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    color: #7a7a6a;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.rec-grid .rec-item a:hover {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border-color: #a3a88f;
+}
+
+.search-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0 5px;
+}
+.search-stats .stat {
+    background: rgba(251, 245, 239, 0.92);
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(200, 195, 188, 0.15);
+    font-size: 13px;
+    color: #6a6a5a;
+}
+.search-stats .stat strong {
+    color: #7a7a6a;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 600px) {
+    .search-box {
+        flex-direction: column;
+    }
+    .search-box button {
+        width: 100%;
+        justify-content: center;
+    }
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .result-item .link {
+        margin-left: 0 !important;
+        margin-top: 10px;
+    }
+    .rec-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+        <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>检索查询</h1>
+        <p>输入关键词 · 快速查找非遗项目</p>
+        <div class="split-line"></div>
+    </div>
+
+    <div class="search-section">
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="输入非遗名称、技艺或传承人，如：苏绣、泥人张">
+            <button id="searchBtn">立即搜索</button>
+        </div>
+
+        <div class="hot-tags">
+            <span class="tag" data-keyword="苏绣">苏绣</span>
+            <span class="tag" data-keyword="京绣">京绣</span>
+            <span class="tag" data-keyword="泥人张">泥人张</span>
+            <span class="tag" data-keyword="苏州评弹">苏州评弹</span>
+            <span class="tag" data-keyword="非遗传承人">非遗传承人</span>
+            <span class="tag" data-keyword="手工技艺">手工技艺</span>
+            <span class="tag" data-keyword="剪纸">剪纸</span>
+            <span class="tag" data-keyword="扎染">扎染</span>
+            <span class="tag" data-keyword="陶瓷">陶瓷</span>
+            <span class="tag" data-keyword="刺绣">刺绣</span>
+        </div>
+
+        <div class="search-stats" id="searchStats">
+            <span class="stat">📚 共收录 <strong id="totalCount">0</strong> 个非遗项目</span>
+            <span class="stat">🏷️ 覆盖 <strong id="tagCount">0</strong> 个标签</span>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            <div class="result-count" id="resultCount">输入关键词后点击搜索</div>
+            <div id="resultList">
+                <div class="no-result"><span class="icon">🔍</span>输入关键词后点击搜索</div>
+            </div>
+        </div>
+
+        <div class="recommend-section">
+            <div class="rec-title">
+                🔥 热门非遗推荐
+                <small>｜快速了解经典项目</small>
+            </div>
+            <div class="rec-grid" id="recGrid">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+
+        // ============================================================
+        // 非遗数据库（所有链接统一为 detail.xxx.html 格式）
+        // ============================================================
+        var 非遗数据 = [
+            { title: '传统刺绣', tags: ['刺绣', '苏绣', '湘绣', '粤绣', '蜀绣', '四大名绣', '手工技艺'], link: 'detail-chuantongcixiu.html', icon: '🧵' },
+            { title: '苏绣', tags: ['苏绣', '刺绣', '四大名绣'], link: 'detail-suxiu.html', icon: '🪡' },
+            { title: '京绣', tags: ['京绣', '刺绣', '燕京八绝', '宫廷技艺'], link: 'detail-jingxiu.html', icon: '👑' },
+            { title: '蜀绣', tags: ['蜀绣', '刺绣', '四大名绣', '四川'], link: 'detail-shuxiu.html', icon: '🐼' },
+            { title: '粤绣', tags: ['粤绣', '刺绣', '四大名绣', '广东'], link: 'detail-yuexiu.html', icon: '🌺' },
+            { title: '湘绣', tags: ['湘绣', '刺绣', '四大名绣', '湖南'], link: 'detail-xiangxiu.html', icon: '🐯' },
+            { title: '传统曲艺', tags: ['曲艺', '评弹', '相声', '京韵大鼓', '说唱'], link: 'detail-chuantongquyi.html', icon: '🎭' },
+            { title: '苏州评弹', tags: ['评弹', '苏州评弹', '曲艺', '江南'], link: 'detail-tanping.html', icon: '🎵' },
+            { title: '豫剧', tags: ['豫剧', '戏曲', '河南', '传统戏剧'], link: 'detail-yuju.html', icon: '🎪' },
+            { title: '传统泥塑', tags: ['泥塑', '泥人张', '惠山泥人', '凤翔泥塑', '彩塑'], link: 'detail-chuantongnisu.html', icon: '🏺' },
+            { title: '泥人张', tags: ['泥人张', '泥塑', '天津', '彩塑'], link: 'detail-tianjingniren.html', icon: '🧑‍🎨' },
+            { title: '传统剪纸', tags: ['剪纸', '蔚县剪纸', '佛山剪纸', '民间美术'], link: 'detail-chuantongjianzhi.html', icon: '✂️' },
+            { title: '冰裂纹瓷器', tags: ['冰裂纹', '哥窑', '龙泉青瓷', '陶瓷', '浙江'], link: 'detail-bingliewenciqi.html', icon: '🧊' },
+            { title: '汝瓷', tags: ['汝瓷', '汝窑', '陶瓷', '河南', '五大名窑'], link: 'detail-ruci.html', icon: '💎' },
+            { title: '钧瓷', tags: ['钧瓷', '钧窑', '陶瓷', '河南', '五大名窑'], link: 'detail-junci.html', icon: '🌈' },
+            { title: '油纸伞', tags: ['油纸伞', '传统技艺', '浙江', '杭州'], link: 'detail-youzhisan.html', icon: '☂️' },
+            { title: '传统云肩', tags: ['云肩', '传统服饰', '刺绣'], link: 'detail-yunjian.html', icon: '☁️' },
+            { title: '白族扎染', tags: ['扎染', '白族扎染', '印染', '云南'], link: 'detail-zaran.html', icon: '🎨' },
+            { title: '绒花', tags: ['绒花', '荣华', '头饰', '四川'], link: 'detail-ronghua.html', icon: '🌸' },
+            { title: '壮族绣球', tags: ['绣球', '壮族', '广西', '刺绣'], link: 'detail-xiuqiu.html', icon: '🏐' },
+            { title: '民俗鱼灯', tags: ['鱼灯', '灯彩', '元宵', '广东'], link: 'detail-yudeng.html', icon: '🐟' },
+            { title: '宫灯', tags: ['宫灯', '灯彩', '北京', '宫廷技艺'], link: 'detail-gongdeng.html', icon: '🏮' },
+            { title: '广东醒狮', tags: ['醒狮', '南狮', '广东', '传统舞蹈'], link: 'detail-xingshi.html', icon: '🦁' },
+            { title: '皮影戏', tags: ['皮影戏', '皮影', '传统戏剧', '陕西'], link: 'detail-piying.html', icon: '🎬' },
+            { title: '苗族银饰', tags: ['银饰', '苗族', '贵州', '锻制技艺'], link: 'detail-yingshi.html', icon: '💍' },
+        ];
+
+        var recommendList = [
+            { title: '苏绣', desc: '四大名绣之首，精细雅洁', tags: ['刺绣', '四大名绣'], link: 'detail-suxiu.html', icon: '🪡' },
+            { title: '泥人张', desc: '百年世家，六代传承', tags: ['泥塑', '天津'], link: 'detail-tianjingniren.html', icon: '🧑‍🎨' },
+            { title: '苏州评弹', desc: '中国最美的声音', tags: ['曲艺', '江南'], link: 'detail-pingtan.html', icon: '🎵' },
+            { title: '传统剪纸', desc: '方寸之间的民俗风情', tags: ['民间美术'], link: 'detail-jianzhi.html', icon: '✂️' },
+            { title: '汝瓷', desc: '雨过天青云破处', tags: ['陶瓷', '五大名窑'], link: 'detail-ruci.html', icon: '💎' },
+            { title: '广东醒狮', desc: '岭南文化最具代表性符号', tags: ['传统舞蹈', '广东'], link: 'detail-xingshi.html', icon: '🦁' },
+            { title: '宫灯', desc: '凝聚宫廷审美与匠艺', tags: ['灯彩', '北京'], link: 'detail-gongdeng.html', icon: '🏮' },
+            { title: '白族扎染', desc: '蓝白交织的苍山洱海之色', tags: ['印染', '云南'], link: 'detail-aran.html', icon: '🎨' }
+        ];
+
+        var input = document.getElementById('searchInput');
+        var btn = document.getElementById('searchBtn');
+        var resultList = document.getElementById('resultList');
+        var resultCount = document.getElementById('resultCount');
+        var tags = document.querySelectorAll('.tag');
+        var recGrid = document.getElementById('recGrid');
+        var totalCount = document.getElementById('totalCount');
+        var tagCount = document.getElementById('tagCount');
+
+        function updateStats() {
+            var allTags = {};
+            for (var i = 0; i < 非遗数据.length; i++) {
+                for (var j = 0; j < 非遗数据[i].tags.length; j++) {
+                    allTags[非遗数据[i].tags[j]] = true;
+                }
+            }
+            totalCount.textContent = 非遗数据.length;
+            tagCount.textContent = Object.keys(allTags).length;
+        }
+        updateStats();
+
+        function renderRecommend() {
+            var html = '';
+            for (var i = 0; i < recommendList.length; i++) {
+                var r = recommendList[i];
+                var tagHtml = '';
+                for (var j = 0; j < r.tags.length; j++) {
+                    tagHtml += '<span>' + r.tags[j] + '</span>';
+                }
+                html += '<div class="rec-item">' +
+                    '<span class="icon">' + r.icon + '</span>' +
+                    '<h5>' + r.title + '</h5>' +
+                    '<div class="rec-tags">' + tagHtml + '</div>' +
+                    '<a href="' + r.link + '">查看详情</a>' +
+                    '</div>';
+            }
+            recGrid.innerHTML = html;
+        }
+        renderRecommend();
+
+        function doSearch(keyword) {
+            keyword = keyword.trim().toLowerCase();
+            if (keyword === '') {
+                resultList.innerHTML = '<div class="no-result"><span class="icon">🔍</span>请输入关键词搜索</div>';
+                resultCount.textContent = '请输入关键词';
+                return;
+            }
+
+            var results = [];
+            for (var i = 0; i < 非遗数据.length; i++) {
+                var item = 非遗数据[i];
+                var match = false;
+                if (item.title.toLowerCase().indexOf(keyword) !== -1) match = true;
+                for (var j = 0; j < item.tags.length; j++) {
+                    if (item.tags[j].toLowerCase().indexOf(keyword) !== -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                if (match) {
+                    results.push(item);
+                }
+            }
+
+            if (results.length === 0) {
+                resultList.innerHTML = '<div class="no-result"><span class="icon">😅</span>未找到相关非遗项目，试试其他关键词</div>';
+                resultCount.textContent = '找到 0 个结果';
+                return;
+            }
+
+            resultCount.textContent = '找到 ' + results.length + ' 个结果';
+            var html = '';
+            for (var k = 0; k < results.length; k++) {
+                var r = results[k];
+                var tagHtml = '';
+                for (var t = 0; t < r.tags.length; t++) {
+                    tagHtml += '<span class="rtag">' + r.tags[t] + '</span>';
+                }
+                html += '<div class="result-item">' +
+                    '<div class="info">' +
+                    '<h4>' + r.icon + ' ' + r.title + '</h4>' +
+                    '<div class="desc">' + r.title + ' — ' + r.tags.slice(0, 3).join('、') + '</div>' +
+                    '<div class="tag-group">' + tagHtml + '</div>' +
+                    '</div>' +
+                    '<div class="link"><a href="' + r.link + '">查看详情</a></div>' +
+                    '</div>';
+            }
+            resultList.innerHTML = html;
+        }
+
+        btn.addEventListener('click', function() {
+            doSearch(input.value);
+        });
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                doSearch(input.value);
+            }
+        });
+
+        for (var t = 0; t < tags.length; t++) {
+            (function(index) {
+                tags[index].addEventListener('click', function() {
+                    var kw = this.getAttribute('data-keyword');
+                    input.value = kw;
+                    doSearch(kw);
+                });
+            })(t);
+        }
+
+        window.addEventListener('load', function() {
+            input.value = '苏绣';
+            doSearch('苏绣');
+        });
+
+    })();
+</script>
+
+</body>
+</html>

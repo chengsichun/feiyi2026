@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>留言互动 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    .form-box {
+    width: 750px;
+    margin: 20px auto 30px;
+    background: rgba(251, 245, 239, 0.92);
+    padding: 38px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(163, 168, 143, 0.08);
+    border: 1px solid rgba(200, 195, 188, 0.25);
+}
+.form-item {
+    margin: 22px 0;
+}
+.form-item label {
+    display: block;
+    margin-bottom: 9px;
+    font-weight: 500;
+    color: #7a7a6a;
+}
+.form-item input,
+.form-item textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #d9d0c8;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border 0.3s;
+    background: #faf3ec;
+    font-family: inherit;
+}
+.form-item input:focus,
+.form-item textarea:focus {
+    border-color: #a3a88f;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(163, 168, 143, 0.15);
+}
+.form-item textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.btn-center {
+    text-align: center;
+    margin-top: 10px;
+}
+.btn-submit {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border: none;
+    padding: 13px 48px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
+.btn-submit:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+    box-shadow: 0 3px 12px rgba(163, 168, 143, 0.25);
+}
+
+.success-msg {
+    display: none;
+    background: #d4edda;
+    color: #155724;
+    padding: 16px 24px;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+.success-msg.show {
+    display: block;
+}
+
+/* ===== 后台管理 - 默认隐藏 ===== */
+.admin-area {
+    display: none;
+    margin: 30px auto 40px;
+    width: 750px;
+    background: rgba(251, 245, 239, 0.92);
+    padding: 30px 38px;
+    border-radius: 16px;
+    border: 2px solid #a3a88f;
+    box-shadow: 0 4px 20px rgba(163, 168, 143, 0.08);
+}
+.admin-area.show {
+    display: block;
+}
+.admin-area h3 {
+    color: #7a7a6a;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+.admin-area .sub {
+    color: #a3a88f;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+.admin-area .msg-item {
+    background: rgba(251, 245, 239, 0.6);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 3px solid #a3a88f;
+}
+.admin-area .msg-item .name {
+    font-weight: 600;
+    color: #7a7a6a;
+}
+.admin-area .msg-item .time {
+    color: #b8bda3;
+    font-size: 12px;
+    margin-left: 12px;
+}
+.admin-area .msg-item .content {
+    color: #4a4a4a;
+    margin-top: 4px;
+    line-height: 1.6;
+}
+.admin-area .msg-item .email {
+    color: #a3a88f;
+    font-size: 13px;
+}
+.admin-area .empty {
+    color: #b8bda3;
+    text-align: center;
+    padding: 20px 0;
+}
+.admin-area .btn-clear {
+    background: #d4866a;
+    color: #fff;
+    border: none;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.admin-area .btn-clear:hover {
+    opacity: 0.85;
+}
+
+.admin-link {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.admin-link a {
+    color: #b8bda3;
+    font-size: 12px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.admin-link a:hover {
+    color: #a3a88f;
+}
+
+/* 密码弹窗 */
+.password-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+.password-overlay.show {
+    display: flex;
+}
+.password-box {
+    background: rgba(251, 245, 239, 0.98);
+    padding: 40px 36px 30px;
+    border-radius: 16px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    border: 1px solid rgba(200, 195, 188, 0.15);
+}
+.password-box h3 {
+    color: #7a7a6a;
+    margin-bottom: 6px;
+}
+.password-box p {
+    color: #a3a88f;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.password-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d9d0c8;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 4px;
+    background: #faf3ec;
+}
+.password-box input:focus {
+    border-color: #a3a88f;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(163, 168, 143, 0.15);
+}
+.password-box .btn-group {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+.password-box .btn-group button {
+    padding: 10px 30px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+.password-box .btn-confirm {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+}
+.password-box .btn-confirm:hover {
+    opacity: 0.85;
+}
+.password-box .btn-cancel {
+    background: #e6e6e6;
+    color: #6a6a5a;
+}
+.password-box .btn-cancel:hover {
+    background: #d4d4d4;
+}
+.password-box .error {
+    color: #d4866a;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+}
+.password-box .error.show {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .form-box, .admin-area {
+        width: 100%;
+        padding: 20px;
+    }
+    .password-box {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+        <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>留言互动</h1>
+        <p>留下你的想法 · 一起交流非遗文化</p>
+        <div class="split-line"></div>
+    </div>
+
+    <!-- 留言表单 -->
+    <div class="form-box">
+        <div class="success-msg" id="successMsg">✅ 提交成功！感谢你的留言。</div>
+
+        <div class="form-item">
+            <label for="name">你的昵称</label>
+            <input type="text" id="name" placeholder="请输入昵称">
+        </div>
+        <div class="form-item">
+            <label for="email">联系邮箱</label>
+            <input type="email" id="email" placeholder="用于接收回复通知（选填）">
+        </div>
+        <div class="form-item">
+            <label for="content">留言内容</label>
+            <textarea id="content" placeholder="分享你喜爱的非遗、提出建议或咨询问题均可"></textarea>
+        </div>
+        <div class="btn-center">
+            <button class="btn-submit" id="submitBtn">提交留言</button>
+        </div>
+    </div>
+
+    <!-- 后台入口 -->
+    <div class="admin-link">
+        <a href="javascript:void(0)" id="adminToggle">🔐 管理后台</a>
+    </div>
+
+    <!-- ===== 后台管理（默认隐藏） ===== -->
+    <div class="admin-area" id="adminArea">
+        <h3>📋 留言管理后台</h3>
+        <div class="sub">仅网站管理员可见 · 留言保存在本机</div>
+        <div id="msgList">
+            <div class="empty">暂无留言</div>
+        </div>
+        <button class="btn-clear" id="clearBtn">清空所有留言</button>
+    </div>
+
+</div>
+
+<!-- ===== 密码弹窗 ===== -->
+<div class="password-overlay" id="passwordOverlay">
+    <div class="password-box">
+        <h3>🔐 管理员验证</h3>
+        <p>请输入后台管理密码</p>
+        <input type="password" id="passwordInput" placeholder="请输入密码" maxlength="20">
+        <div class="error" id="passwordError">❌ 密码错误，请重试</div>
+        <div class="btn-group">
+            <button class="btn-cancel" id="passwordCancel">取消</button>
+            <button class="btn-confirm" id="passwordConfirm">确认</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        var nameInput = document.getElementById('name');
+        var emailInput = document.getElementById('email');
+        var contentInput = document.getElementById('content');
+        var submitBtn = document.getElementById('submitBtn');
+        var successMsg = document.getElementById('successMsg');
+        var msgList = document.getElementById('msgList');
+        var clearBtn = document.getElementById('clearBtn');
+        var adminToggle = document.getElementById('adminToggle');
+        var adminArea = document.getElementById('adminArea');
+
+        // 密码相关
+        var overlay = document.getElementById('passwordOverlay');
+        var passwordInput = document.getElementById('passwordInput');
+        var passwordConfirm = document.getElementById('passwordConfirm');
+        var passwordCancel = document.getElementById('passwordCancel');
+        var passwordError = document.getElementById('passwordError');
+
+        var ADMIN_PASSWORD = '272151';
+        var STORAGE_KEY = 'feiyi_messages';
+        var isAdminOpen = false;
+
+        // ========== 加载留言 ==========
+        function loadMessages() {
+            var data = localStorage.getItem(STORAGE_KEY);
+            if (!data) return [];
+            try {
+                return JSON.parse(data);
+            } catch(e) {
+                return [];
+            }
+        }
+
+        // ========== 保存留言 ==========
+        function saveMessages(messages) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+        }
+
+        // ========== 渲染留言 ==========
+        function renderMessages() {
+            var messages = loadMessages();
+            if (messages.length === 0) {
+                msgList.innerHTML = '<div class="empty">暂无留言</div>';
+                return;
+            }
+            var html = '';
+            for (var i = messages.length - 1; i >= 0; i--) {
+                var m = messages[i];
+                var time = m.time || '未知时间';
+                var email = m.email ? '📧 ' + m.email : '';
+                html += '<div class="msg-item">' +
+                    '<span class="name">' + escapeHtml(m.name) + '</span>' +
+                    '<span class="time">' + time + '</span>' +
+                    (email ? '<span class="email">' + email + '</span>' : '') +
+                    '<div class="content">' + escapeHtml(m.content) + '</div>' +
+                    '</div>';
+            }
+            msgList.innerHTML = html;
+        }
+
+        // ========== 防XSS ==========
+        function escapeHtml(text) {
+            if (!text) return '';
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ========== 提交留言 ==========
+        function submitMessage() {
+            var name = nameInput.value.trim();
+            var email = emailInput.value.trim();
+            var content = contentInput.value.trim();
+
+            if (!name) {
+                alert('请输入你的昵称');
+                nameInput.focus();
+                return;
+            }
+            if (!content) {
+                alert('请输入留言内容');
+                contentInput.focus();
+                return;
+            }
+            if (content.length < 5) {
+                alert('留言内容至少5个字');
+                return;
+            }
+
+            var messages = loadMessages();
+            messages.push({
+                name: name,
+                email: email || '',
+                content: content,
+                time: new Date().toLocaleString('zh-CN')
+            });
+            saveMessages(messages);
+
+            nameInput.value = '';
+            emailInput.value = '';
+            contentInput.value = '';
+
+            successMsg.classList.add('show');
+            setTimeout(function() {
+                successMsg.classList.remove('show');
+            }, 3000);
+
+            if (isAdminOpen) {
+                renderMessages();
+            }
+        }
+
+        // ========== 清空留言 ==========
+        function clearAllMessages() {
+            if (confirm('确定要删除所有留言吗？')) {
+                saveMessages([]);
+                if (isAdminOpen) {
+                    renderMessages();
+                }
+            }
+        }
+
+        // ========== 显示密码弹窗 ==========
+        function showPasswordOverlay() {
+            overlay.classList.add('show');
+            passwordInput.value = '';
+            passwordError.classList.remove('show');
+            passwordInput.focus();
+        }
+
+        // ========== 隐藏密码弹窗 ==========
+        function hidePasswordOverlay() {
+            overlay.classList.remove('show');
+            passwordInput.value = '';
+            passwordError.classList.remove('show');
+        }
+
+        // ========== 验证密码 ==========
+        function verifyPassword() {
+            var input = passwordInput.value.trim();
+            if (input === ADMIN_PASSWORD) {
+                hidePasswordOverlay();
+                openAdmin();
+            } else {
+                passwordError.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // ========== 打开后台 ==========
+        function openAdmin() {
+            isAdminOpen = true;
+            adminArea.classList.add('show');
+            adminToggle.textContent = '🔒 关闭后台';
+            renderMessages();
+        }
+
+        // ========== 关闭后台 ==========
+        function closeAdmin() {
+            isAdminOpen = false;
+            adminArea.classList.remove('show');
+            adminToggle.textContent = '🔐 管理后台';
+        }
+
+        // ========== 切换后台 ==========
+        function toggleAdmin() {
+            if (isAdminOpen) {
+                closeAdmin();
+            } else {
+                showPasswordOverlay();
+            }
+        }
+
+        // ========== 绑定事件 ==========
+        submitBtn.addEventListener('click', submitMessage);
+
+        document.querySelectorAll('input, textarea').forEach(function(el) {
+            el.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+                    submitBtn.click();
+                }
+            });
+        });
+
+        clearBtn.addEventListener('click', clearAllMessages);
+        adminToggle.addEventListener('click', toggleAdmin);
+
+        passwordConfirm.addEventListener('click', verifyPassword);
+        passwordCancel.addEventListener('click', hidePasswordOverlay);
+
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                verifyPassword();
+            }
+            if (e.key === 'Escape') {
+                hidePasswordOverlay();
+            }
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                hidePasswordOverlay();
+            }
+        });
+
+        // 默认关闭后台
+        adminArea.classList.remove('show');
+    })();
+</script>
+
+</body>
+</html>

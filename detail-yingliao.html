@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>饮品联动 - 非遗跨界</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 8px 24px;
+            background: rgba(163, 168, 143, 0.12);
+            border-radius: 25px;
+            color: #7a7a6a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(163, 168, 143, 0.2);
+        }
+
+        .story-box {
+            background: rgba(251, 245, 239, 0.92);
+            border-radius: 16px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(200, 195, 188, 0.2);
+            box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+        }
+
+        .story-box .header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(200, 195, 188, 0.12);
+        }
+        .story-box .header .icon { font-size: 30px; }
+        .story-box .header .name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7a7a6a;
+            letter-spacing: 2px;
+        }
+        .story-box .header .count {
+            font-size: 13px;
+            color: #a3a88f;
+            margin-left: auto;
+            background: rgba(163, 168, 143, 0.1);
+            padding: 2px 16px;
+            border-radius: 20px;
+        }
+
+        .item {
+            display: flex;
+            gap: 30px;
+            padding: 26px 0;
+            border-bottom: 1px dashed rgba(200, 195, 188, 0.12);
+        }
+        .item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .item .img-box {
+            flex-shrink: 0;
+            width: 230px;
+            height: 190px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #ece5dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            color: #a3a88f;
+            border: 1px solid rgba(200, 195, 188, 0.12);
+        }
+        .item .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item .info { flex: 1; }
+        .item .info .brand-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #a3a88f, #b8bda3);
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .item .info h4 {
+            color: #7a7a6a;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .item .info .sub {
+            color: #a3a88f;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .item .info .tag-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .item .info .tag-group .tag {
+            font-size: 11px;
+            padding: 2px 14px;
+            border-radius: 20px;
+            background: rgba(200, 195, 188, 0.15);
+            color: #7a7a6a;
+        }
+        .item .info .tag-group .tag.hot {
+            background: #f9e6e6;
+            color: #c97a7a;
+        }
+        .item .info p {
+            color: #4a4a4a;
+            font-size: 14.5px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+        }
+        .item .info .meaning {
+            background: rgba(251, 245, 239, 0.6);
+            padding: 14px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #a3a88f;
+            font-size: 14px;
+            color: #6a6a5a;
+            line-height: 1.8;
+        }
+        .item .info .meaning strong { color: #7a7a6a; }
+
+        .item.reverse { flex-direction: row-reverse; }
+
+        @media screen and (max-width: 768px) {
+            .story-box { padding: 20px 16px; }
+            .item { flex-direction: column !important; padding: 18px 0; }
+            .item .img-box { width: 100%; height: 160px; }
+            .story-box .header .name { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <a href="liandong.html" class="back-link">← 返回联动首页</a>
+
+    <div class="hero-title">
+        <h1>🧋 饮品联动</h1>
+        <p>一杯奶茶里的非遗 · 唇齿间的文化温度</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#6a6a5a;font-size:15px;margin-bottom:30px;letter-spacing:1px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        🧋 从霸王茶姬到喜茶，从茶百道到奈雪的茶……<br>
+        🌿 茶饮品牌正在用一杯杯饮品，传递非遗的温度。
+    </p>
+
+    <!-- ===== 霸王茶姬 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">🧋</span>
+            <span class="name">霸王茶姬</span>
+            <span class="count">2 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/bawangchaji2.jpg" alt="霸王茶姬×掐丝珐琅" onerror="this.parentElement.innerHTML='🧋'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">霸王茶姬</span>
+                <h4>霸王茶姬 × 云南银胎掐丝珐琅</h4>
+                <div class="sub">2025年 · 云南非遗品牌推广周</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">银胎掐丝珐琅</span>
+                    <span class="tag">省级非遗</span>
+                </div>
+                <p>2025年11月，霸王茶姬在云南非遗品牌推广周上，推出了与云南银胎掐丝珐琅非遗联名的系列周边，包括银胎掐丝珐琅杯、掐丝珐琅茶匙礼盒、仿掐丝珐琅胸针等。现场快闪区还设置了掐丝珐琅制作体验环节，消费者可参与采釉料、制银胚、掐银丝等工序。同时推出的云南区域限定饮品“去云南·玫瑰普洱”，杯身色彩灵感源自云南花香文化。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 霸王茶姬将非遗融入“在地体验”——在云南喝云南非遗联名茶，让非遗从“展示品”变成“可体验、可消费的生活方式”。
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="item reverse">
+            <div class="img-box">
+                <img src="img/bawangchaji.jpg" alt="霸王茶姬×畲族" onerror="this.parentElement.innerHTML='🧋'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">霸王茶姬</span>
+                <h4>霸王茶姬 × 畲族文化 · 七夕限定</h4>
+                <div class="sub">2025年七夕 · 全国焕新包材</div>
+                <div class="tag-group">
+                    <span class="tag">畲族文化</span>
+                    <span class="tag">非遗传承人</span>
+                </div>
+                <p>2025年七夕，霸王茶姬全国焕新推出七夕限定主题包材与宣传片，引入畲族文化元素，邀请泰顺畲族非遗代表性传承人蓝晓露担任文化顾问并参与拍摄。从一杯奶茶到一座畲乡，文化IP的跨界融合正成为地方文旅发展的新引擎。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 茶饮品牌邀请非遗传承人直接参与产品设计和宣传，让非遗传承人从“幕后”走到“台前”，提升了非遗传承人的社会可见度。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 喜茶 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">🧋</span>
+            <span class="name">喜茶</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/xicha.jpg" alt="喜茶×剪纸" onerror="this.parentElement.innerHTML='🧋'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">喜茶</span>
+                <h4>喜茶 × 佛山剪纸 · 春节限定</h4>
+                <div class="sub">2024年春节 · 全国限定包装</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">佛山剪纸</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>2024年春节期间，喜茶与佛山剪纸非遗传承人合作，推出春节限定剪纸主题茶饮包装。杯身和手提袋上印制了精美的剪纸图案，融合了传统年画和现代设计语言。活动期间还推出了剪纸DIY材料包，让消费者在品茶的同时体验剪纸的乐趣，让非遗走进年轻人的日常生活。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 将国家级非遗佛山剪纸与春节茶饮消费场景结合，让消费者在购买奶茶的同时接触非遗，实现了非遗在生活化场景中的自然传播。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+          <!-- ===== 茶百道 ===== -->
+    <div class="story-box">
+        <div class="header">
+            <span class="icon">🧋</span>
+            <span class="name">茶百道</span>
+            <span class="count">1 个联动</span>
+        </div>
+
+        <div class="item">
+            <div class="img-box">
+                <img src="img/chabaidao.jpg" alt="茶百道×天华锦" onerror="this.parentElement.innerHTML='🧋'">
+            </div>
+            <div class="info">
+                <span class="brand-tag">茶百道</span>
+                <h4>茶百道 × 宋锦天华锦 · 锦上添花</h4>
+                <div class="sub">2024年春节 · 全国限定包装</div>
+                <div class="tag-group">
+                    <span class="tag hot">🔥 热门</span>
+                    <span class="tag">宋锦</span>
+                    <span class="tag">天华锦</span>
+                    <span class="tag">国家级非遗</span>
+                </div>
+                <p>2024年春节期间，茶百道携手宋锦国家级非遗传承人钱小萍老师，以源于宋代的天华锦纹为灵感，原创设计推出“锦上添花”新年限定包装。天华锦花纹繁复规矩、整体和谐华美，是中国古代织锦纹样的集大成之作，发源自宋代，流行于明清[citation:1][citation:4]。包装在尊重传统纹样形制的基础上，创新融入“茶叶”“茶杯”“茶壶”等茶饮元素，以喜庆的新春红为主色调，蕴含着“锦上添花”的美好寓意[citation:1][citation:9]。</p>
+                <div class="meaning">
+                    <strong>💡 意义：</strong> 将宋锦非遗工艺与新春茶饮消费场景结合，让传统织锦纹样以现代包装设计的形式走进年轻人的日常，实现了非遗在生活化场景中的自然传播。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin:20px 0 40px;">
+        <a href="liandong.html" style="display:inline-block;padding:10px 30px;background:linear-gradient(135deg,#a3a88f,#b8bda3);color:#fff;border-radius:25px;text-decoration:none;font-size:14px;letter-spacing:1px;transition:all 0.3s;">← 返回联动首页</a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

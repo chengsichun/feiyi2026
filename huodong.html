@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>非遗活动 - 中华非遗文化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      .activity-filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 10px 0 30px;
+    justify-content: center;
+}
+.activity-filters .filter-btn {
+    padding: 8px 24px;
+    border-radius: 25px;
+    border: 1px solid rgba(200, 195, 188, 0.3);
+    background: rgba(251, 245, 239, 0.6);
+    color: #6a6a5a;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+.activity-filters .filter-btn:hover,
+.activity-filters .filter-btn.active {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+    border-color: #a3a88f;
+}
+.activity-card {
+    background: rgba(251, 245, 239, 0.92);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(200, 195, 188, 0.25);
+    box-shadow: 0 4px 20px rgba(163, 168, 143, 0.06);
+    margin-bottom: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    transition: all 0.3s;
+}
+.activity-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(163, 168, 143, 0.14);
+}
+.activity-card .left {
+    width: 120px;
+    min-height: 140px;
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 16px 12px;
+    flex-shrink: 0;
+    text-align: center;
+}
+.activity-card .left .day {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+.activity-card .left .month {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-top: 2px;
+}
+.activity-card .left .status {
+    font-size: 12px;
+    background: rgba(255,255,255,0.25);
+    padding: 2px 14px;
+    border-radius: 20px;
+    margin-top: 8px;
+}
+.activity-card .right {
+    flex: 1;
+    padding: 22px 30px;
+    min-width: 220px;
+}
+.activity-card .right .tag-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+.activity-card .right .tag-group .tag {
+    font-size: 12px;
+    padding: 2px 14px;
+    border-radius: 20px;
+    background: rgba(200, 195, 188, 0.15);
+    color: #7a7a6a;
+}
+.activity-card .right .tag-group .tag.hot {
+    background: #f9e6e6;
+    color: #c97a7a;
+}
+.activity-card .right h3 {
+    color: #7a7a6a;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.activity-card .right .meta {
+    color: #a3a88f;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.activity-card .right .meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.activity-card .right p {
+    color: #4a4a4a;
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 14px;
+}
+.activity-card .right .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.activity-card .right .btn-group a {
+    padding: 6px 22px;
+    border-radius: 25px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.activity-card .right .btn-group .btn-primary {
+    background: linear-gradient(135deg, #a3a88f, #b8bda3);
+    color: #fff;
+}
+.activity-card .right .btn-group .btn-primary:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+}
+.activity-card .right .btn-group .btn-outline {
+    border: 1px solid rgba(163, 168, 143, 0.3);
+    color: #7a7a6a;
+    background: transparent;
+}
+.activity-card .right .btn-group .btn-outline:hover {
+    background: rgba(251, 245, 239, 0.6);
+}
+.activity-card.status-ended .left {
+    background: #b8bda3;
+}
+.activity-card.status-ongoing .left {
+    background: linear-gradient(135deg, #e8a87c, #d4866a);
+}
+.no-result {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: #b8bda3;
+    font-size: 18px;
+}
+.no-result.show {
+    display: block;
+}
+.filter-count {
+    text-align: center;
+    color: #a3a88f;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 768px) {
+    .activity-card .left {
+        width: 100%;
+        min-height: 70px;
+        flex-direction: row;
+        gap: 20px;
+        padding: 12px 20px;
+    }
+    .activity-card .left .day {
+        font-size: 28px;
+    }
+    .activity-card .right {
+        padding: 18px 20px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+      <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="index.html#jingdian">经典非遗分类</a ></li>
+            <li><a href="index.html#jiangren">匠人推荐</a ></li>
+            <li><a href="index.html#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="hero-title">
+        <h1>非遗活动</h1>
+        <p>线上 · 线下 · 体验 · 传承</p>
+        <div class="split-line"></div>
+    </div>
+
+    <p style="text-align:center;color:#557777;font-size:16px;margin-bottom:20px;letter-spacing:2px;max-width:750px;margin-left:auto;margin-right:auto;line-height:1.8;">
+        参与非遗活动，零距离触摸传统技艺的温度。<br>
+        以下为近期全国各地的非遗活动信息，欢迎报名参与。
+    </p>
+
+    <div class="activity-filters" id="filterBtns">
+        <a href="javascript:void(0)" class="filter-btn active" data-filter="all">全部</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="ongoing">🔥 进行中</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="upcoming">📅 即将开始</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="offline">🏷️ 线下体验</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="online">📱 线上直播</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="exhibition">🖼️ 展览</a>
+        <a href="javascript:void(0)" class="filter-btn" data-filter="family">👨‍👩‍👧‍👦 亲子</a>
+    </div>
+
+    <div class="filter-count" id="filterCount">共 23 个活动</div>
+
+    <!-- ===== 活动1：进行中 ===== -->
+    <div class="activity-card status-ongoing" data-type="ongoing offline">
+        <div class="left">
+            <div class="day">25</div>
+            <div class="month">2026.06</div>
+            <div class="status">● 进行中</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag hot">🔥 热门</span>
+                <span class="tag">线下体验</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>校园非遗手作工坊 · 第三期</h3>
+            <div class="meta">
+                <span>📍 清远职业技术学院 · 非遗传承基地</span>
+                <span>🕐 6月20日 - 6月25日 14:00-17:00</span>
+            </div>
+            <p>本期工坊邀请民间剪纸艺人李月爱老师、泥人张第六代传人张宇老师现场授课。内容包含剪纸体验、简易泥塑制作、刺绣基础针法教学。面向全体师生免费参与，每日限额40人，先到先得。完成作品可带走留念。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动2：全国非遗博览会巡展 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition">
+        <div class="left">
+            <div class="day">28</div>
+            <div class="month">2026.06</div>
+            <div class="status">⏳ 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">展览</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>全国非遗博览会巡展 · 清远站</h3>
+            <div class="meta">
+                <span>📍 清远市文化馆 · 一楼展厅</span>
+                <span>🕐 6月28日 - 7月5日 09:00-17:00</span>
+            </div>
+            <p>多地联合举办非遗作品展，展出苏绣、京绣、苗族银饰、天津泥人、油纸伞、宫灯、扎染等非遗精品百余件。展览分为"刺绣之美""泥塑之韵""银饰之华""民俗之光"四大主题展区，近距离感受传统手艺的魅力。现场设置互动体验区，可亲手尝试简易非遗技艺。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约观展</a>
+                <a href="#" class="btn-outline">查看展品</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动3：线上直播 ===== -->
+    <div class="activity-card" data-type="upcoming online">
+        <div class="left">
+            <div class="day">30</div>
+            <div class="month">2026.06</div>
+            <div class="status">⏳ 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag hot">🔥 热门</span>
+                <span class="tag">线上直播</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>传承人线上直播 · 苏绣与评弹专场</h3>
+            <div class="meta">
+                <span>📱 抖音 / B站 / 微信视频号</span>
+                <span>🕐 6月30日 19:30-21:30</span>
+            </div>
+            <p>苏绣国家级非遗传承人陈英华、苏州评弹省级非遗传承人周红联合直播。陈英华老师现场演示双面绣针法，解密"针尖上的奇迹"；周红老师现场弹唱《玉蜻蜓》《苏州好风光》经典选段，讲述评弹艺术的前世今生。直播期间设有抽奖环节，奖品为非遗文创礼盒。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约直播</a>
+                <a href="#" class="btn-outline">设置提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动4：暑期亲子体验营 ===== -->
+    <div class="activity-card" data-type="upcoming offline family">
+        <div class="left">
+            <div class="day">05</div>
+            <div class="month">2026.07</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">亲子</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>暑期非遗亲子体验营 · 绒花与扎染专场</h3>
+            <div class="meta">
+                <span>📍 清远市青少年宫 · 非遗教室</span>
+                <span>🕐 7月5日 - 7月10日 每天 10:00-12:00</span>
+            </div>
+            <p>暑期特别策划的亲子非遗体验活动，由绒花传承人和扎染传承人亲自授课。家长和孩子共同学习制作绒花头饰和扎染手帕，体验传统手工的乐趣。活动共6天，每天限15组家庭（一大一小），费用全免，材料由主办方提供。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动5：非遗进社区 ===== -->
+    <div class="activity-card" data-type="upcoming offline">
+        <div class="left">
+            <div class="day">12</div>
+            <div class="month">2026.07</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">非遗进社区</span>
+            </div>
+            <h3>非遗进社区 · 剪纸与鱼灯制作体验</h3>
+            <div class="meta">
+                <span>📍 清远市清城区 · 各街道文化站</span>
+                <span>🕐 7月12日 - 7月18日 15:00-17:00</span>
+            </div>
+            <p>非遗进社区系列活动，剪纸艺人李月爱和鱼灯传承人走进清城区5个街道文化站，开展剪纸和鱼灯制作公益课程。每站课程2天，社区居民可免费参加，学习剪纸基础技法和鱼灯扎制工艺。完成作品可在社区文化节展出。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">查看排期</a>
+                <a href="#" class="btn-outline">咨询报名</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动6：匠心神韵联展 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition">
+        <div class="left">
+            <div class="day">01</div>
+            <div class="month">2026.08</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">展览</span>
+            </div>
+            <h3>匠心神韵 · 非遗传承人作品联展</h3>
+            <div class="meta">
+                <span>📍 广东省文化馆 · 非遗展厅</span>
+                <span>🕐 8月1日 - 8月30日 09:00-18:00</span>
+            </div>
+            <p>本次联展汇集了陈英华、张宇、周红、李月爱四位非遗传承人的代表作品100余件，涵盖苏绣、泥塑、评弹道具、剪纸四大门类。展览以"匠心神韵"为主题，通过作品展示、影像资料和现场演示，全面呈现传承人的艺术成就和守艺故事。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约观展</a>
+                <a href="#" class="btn-outline">查看展品</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动7：云赏非遗 ===== -->
+    <div class="activity-card" data-type="upcoming online">
+        <div class="left">
+            <div class="day">08</div>
+            <div class="month">2026.08</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线上直播</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>云赏非遗 · 宫灯与油纸伞制作技艺直播</h3>
+            <div class="meta">
+                <span>📱 抖音 / 微信视频号</span>
+                <span>🕐 8月8日 20:00-22:00</span>
+            </div>
+            <p>宫灯传承人和油纸伞传承人联袂直播，现场演示宫灯榫卯结构组装、油纸伞72道工序中的核心步骤。观众可在线提问，参与互动有机会获得非遗传承人亲手制作的小礼品。适合对传统工艺感兴趣的观众观看。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约直播</a>
+                <a href="#" class="btn-outline">设置提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动8：中秋非遗特别展 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition family">
+        <div class="left">
+            <div class="day">15</div>
+            <div class="month">2026.09</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">展览</span>
+                <span class="tag">亲子</span>
+            </div>
+            <h3>中秋非遗特别展 · 鱼灯与宫灯主题展</h3>
+            <div class="meta">
+                <span>📍 清远市博物馆 · 特展厅</span>
+                <span>🕐 9月15日 - 10月8日 09:00-17:00</span>
+            </div>
+            <p>中秋佳节特别策划，集中展示传统鱼灯和宫灯精品200余件，涵盖明代、清代、民国及当代作品。展览设置"灯彩历史""制作技艺""民俗文化"三大板块，现场设有鱼灯DIY体验区，适合家庭观众参与。中秋节当天有鱼灯巡游活动。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约观展</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动9：苗族银饰体验课 ===== -->
+    <div class="activity-card" data-type="upcoming offline">
+        <div class="left">
+            <div class="day">20</div>
+            <div class="month">2026.09</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">银饰</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>苗族银饰锻制技艺体验课</h3>
+            <div class="meta">
+                <span>📍 清远市非遗体验中心 · 银饰工坊</span>
+                <span>🕐 9月20日 - 9月22日 14:00-17:00</span>
+            </div>
+            <p>苗族银饰传承人亲授银饰锻制技艺，课程包括银饰设计、錾刻、打磨、抛光等工序。学员可亲手制作一枚银戒指或银吊坠，成品可带走留念。课程连续三天，费用380元/人（含材料费），限15人，适合对金属工艺感兴趣的成年人。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">咨询详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动10：国庆非遗嘉年华 ===== -->
+    <div class="activity-card" data-type="upcoming online offline">
+        <div class="left">
+            <div class="day">01</div>
+            <div class="month">2026.10</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">线上直播</span>
+                <span class="tag">国庆特辑</span>
+            </div>
+            <h3>国庆非遗嘉年华 · 线上线下联动</h3>
+            <div class="meta">
+                <span>📍 清远市文化公园 · 线上同步直播</span>
+                <span>🕐 10月1日 - 10月7日 全天</span>
+            </div>
+            <p>国庆期间非遗嘉年华，设置刺绣、泥塑、剪纸、扎染、油纸伞、宫灯六大体验区，每天一位非遗传承人现场展演。线上同步直播，无法到场的观众可在抖音、B站观看。现场设有非遗美食摊位和非遗文创市集，集章打卡可兑换非遗小礼品。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">查看排期</a>
+                <a href="#" class="btn-outline">预约直播</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动11：非遗影像展 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition">
+        <div class="left">
+            <div class="day">10</div>
+            <div class="month">2026.10</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">展览</span>
+                <span class="tag">非遗影像</span>
+            </div>
+            <h3>非遗影像展 · 传承人肖像与纪实摄影展</h3>
+            <div class="meta">
+                <span>📍 清远市美术馆 · 二楼展厅</span>
+                <span>🕐 10月10日 - 11月10日 09:00-17:00</span>
+            </div>
+            <p>展出由专业摄影团队拍摄的非遗传承人肖像摄影作品和纪实影像100余幅，涵盖陈英华、张宇、周红、李月爱等数十位非遗传承人。展览以影像语言讲述传承人的守艺故事，呈现非遗技艺背后的温度与力量。部分作品曾获省级摄影奖项。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约观展</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动12：冬至非遗体验 ===== -->
+    <div class="activity-card" data-type="upcoming offline">
+        <div class="left">
+            <div class="day">21</div>
+            <div class="month">2026.10</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">冬至</span>
+                <span class="tag">民俗</span>
+            </div>
+            <h3>冬至非遗民俗体验 · 剪纸与宫灯迎新年</h3>
+            <div class="meta">
+                <span>📍 清远市非遗体验中心</span>
+                <span>🕐 10月21日 - 10月23日 14:00-17:00</span>
+            </div>
+            <p>冬至迎新年特别活动，剪纸艺人教授新年主题剪纸（福字、生肖、窗花），宫灯传承人指导制作新年宫灯。活动连续三天，每天内容不同。参与者可将自己制作的剪纸和宫灯带回家，为新年增添传统年味。费用全免，每日限额30人。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动13：重阳非遗敬老 ===== -->
+    <div class="activity-card" data-type="upcoming offline family">
+        <div class="left">
+            <div class="day">11</div>
+            <div class="month">2026.10</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">亲子</span>
+                <span class="tag">重阳节</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>重阳非遗敬老 · 剪纸与香囊制作体验</h3>
+            <div class="meta">
+                <span>📍 清远市各社区养老服务中心</span>
+                <span>🕐 10月11日 - 10月14日 09:30-11:30</span>
+            </div>
+            <p>重阳节敬老主题非遗活动，由剪纸传承人和中药香囊传承人走进社区养老服务中心，教老人和家属制作重阳主题剪纸（寿桃、仙鹤、菊花）和传统中药香囊。活动旨在通过非遗技艺传递敬老爱老的传统美德，促进代际交流。活动免费，材料由主办方提供，每日限30人。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动14：非遗文创市集 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition">
+        <div class="left">
+            <div class="day">18</div>
+            <div class="month">2026.10</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">市集</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>非遗文创市集 · 匠心好物节</h3>
+            <div class="meta">
+                <span>📍 清远市文化公园 · 中心广场</span>
+                <span>🕐 10月18日 - 10月20日 10:00-20:00</span>
+            </div>
+            <p>汇聚30余位非遗传承人和文创设计师，展销苏绣团扇、泥人张彩塑、苗族银饰、剪纸文创、扎染服饰、油纸伞、宫灯、绒花发饰等非遗精品。市集设有非遗技艺体验区、非遗美食摊位和民谣舞台，集购物、体验、娱乐于一体。适合家庭、年轻人打卡消费，感受非遗的当代魅力。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">查看摊位</a>
+                <a href="#" class="btn-outline">预约入场</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动15：立冬非遗手作 ===== -->
+    <div class="activity-card" data-type="upcoming offline">
+        <div class="left">
+            <div class="day">07</div>
+            <div class="month">2026.11</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">立冬</span>
+            </div>
+            <h3>立冬非遗手作 · 扎染围巾与剪纸窗花体验</h3>
+            <div class="meta">
+                <span>📍 清远市非遗体验中心 · 综合教室</span>
+                <span>🕐 11月7日 - 11月8日 14:00-17:00</span>
+            </div>
+            <p>立冬节气非遗体验活动，扎染传承人指导制作蓝染羊毛围巾，剪纸传承人教授冬季主题窗花。围巾和窗花成品可带回家使用或装饰，为冬日增添温暖的非遗气息。活动收费：扎染围巾120元/条，剪纸体验免费。每日限20人，需提前预约。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动16：小雪节气直播 ===== -->
+    <div class="activity-card" data-type="upcoming online">
+        <div class="left">
+            <div class="day">22</div>
+            <div class="month">2026.11</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线上直播</span>
+                <span class="tag">小雪</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>小雪节气 · 绒花与银饰制作直播</h3>
+            <div class="meta">
+                <span>📱 抖音 / B站 / 微信视频号</span>
+                <span>🕐 11月22日 20:00-22:00</span>
+            </div>
+            <p>小雪节气特别直播，绒花传承人现场制作梅花主题绒花头饰，银饰传承人演示银质梅花胸针锻制过程。直播结合节气文化与非遗技艺，讲述小雪习俗与梅花意象的文化内涵。直播间设有抽奖环节，奖品为传承人亲手制作的小礼品。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约直播</a>
+                <a href="#" class="btn-outline">设置提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动17：大雪宫灯展 ===== -->
+    <div class="activity-card" data-type="upcoming offline exhibition">
+        <div class="left">
+            <div class="day">07</div>
+            <div class="month">2026.12</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">展览</span>
+                <span class="tag">大雪</span>
+            </div>
+            <h3>大雪非遗展 · 宫灯与油纸伞精品特展</h3>
+            <div class="meta">
+                <span>📍 清远市文化馆 · 特展厅</span>
+                <span>🕐 12月7日 - 12月20日 09:00-17:00</span>
+            </div>
+            <p>大雪节气特别展览，集中展出宫灯和油纸伞精品60余件，涵盖传统经典款和现代创新款。展览特别设置了"光影之美"互动区，观众可在暗室中欣赏宫灯点亮后的光影效果。现场每天15:00-16:00安排传承人讲解和制作演示。展览免费对公众开放。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约观展</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动18：元旦非遗嘉年华 ===== -->
+    <div class="activity-card" data-type="upcoming online offline family">
+        <div class="left">
+            <div class="day">31</div>
+            <div class="month">2026.12</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">线上直播</span>
+                <span class="tag">元旦</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>元旦非遗嘉年华 · 跨年特别活动</h3>
+            <div class="meta">
+                <span>📍 清远市文化公园 · 线上同步直播</span>
+                <span>🕐 12月31日 18:00 - 1月1日 00:30</span>
+            </div>
+            <p>元旦跨年非遗嘉年华，10余位非遗传承人现场展演，包括苏绣、泥塑、剪纸、扎染、银饰、绒花、油纸伞、宫灯、鱼灯、评弹等。现场设有非遗美食市集、灯彩游园会和跨年倒计时活动。线上同步直播，无法到场的观众可在抖音、B站观看。现场打卡集章可兑换非遗限量版文创。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">查看排期</a>
+                <a href="#" class="btn-outline">预约直播</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动19：春节系列活动预告 ===== -->
+    <div class="activity-card" data-type="upcoming online offline family exhibition">
+        <div class="left">
+            <div class="day">春节</div>
+            <div class="month">2027.01</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">线上直播</span>
+                <span class="tag">展览</span>
+                <span class="tag">亲子</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>2027春节非遗系列活动 · 预告</h3>
+            <div class="meta">
+                <span>📍 清远市各大文化场馆 · 线上同步</span>
+                <span>🕐 2027年1月15日 - 2月15日</span>
+            </div>
+            <p>2027年春节非遗系列活动预告：包括"非遗年货市集"（1月15日-25日）、"新春剪纸窗花展"（1月20日-2月15日）、"宫灯鱼灯闹新春"（1月28日-2月15日）、"春节非遗传承人直播"（1月28日-2月4日，每晚20:00）、"元宵鱼灯巡游"（2月12日）等十余项活动。详情请关注本网站后续公告。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">查看全部</a>
+                <a href="#" class="btn-outline">预约提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动20：元宵灯会 ===== -->
+    <div class="activity-card" data-type="upcoming offline family">
+        <div class="left">
+            <div class="day">12</div>
+            <div class="month">2027.02</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">亲子</span>
+                <span class="tag">元宵节</span>
+                <span class="tag hot">🔥 热门</span>
+            </div>
+            <h3>元宵灯会 · 鱼灯巡游与宫灯展览</h3>
+            <div class="meta">
+                <span>📍 清远市江滨公园 · 沿线巡游</span>
+                <span>🕐 2027年2月12日 18:00-22:00</span>
+            </div>
+            <p>元宵节大型灯会活动，由鱼灯传承人带队进行鱼灯巡游，百余名参与者手持传统鱼灯沿江滨公园巡游。现场设有宫灯展览区、灯谜互动区和元宵品尝区。巡游队伍可现场报名参与，限200人，先到先得。活动免费，适合家庭、情侣、朋友组队参加。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">报名巡游</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动21：传承人年度论坛 ===== -->
+    <div class="activity-card" data-type="upcoming online offline">
+        <div class="left">
+            <div class="day">25</div>
+            <div class="month">2027.02</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">线上直播</span>
+                <span class="tag">论坛</span>
+            </div>
+            <h3>非遗传承人年度论坛 · 守艺与创新</h3>
+            <div class="meta">
+                <span>📍 清远市文化馆 · 报告厅</span>
+                <span>🕐 2027年2月25日 09:00-17:00</span>
+            </div>
+            <p>邀请陈英华、张宇、周红、李月爱等20余位非遗传承人参加年度论坛，围绕"非遗技艺的当代价值""非遗传承与创新""非遗助力乡村振兴"等议题进行深入探讨。论坛设主旨演讲、圆桌对话和自由交流环节。线上线下同步进行，免费预约参加，限200人。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">预约参会</a>
+                <a href="#" class="btn-outline">预约直播</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动22：三八妇女节 ===== -->
+    <div class="activity-card" data-type="upcoming offline">
+        <div class="left">
+            <div class="day">08</div>
+            <div class="month">2027.03</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">妇女节</span>
+                <span class="tag">免费</span>
+            </div>
+            <h3>三八妇女节 · 绒花与苏绣体验专场</h3>
+            <div class="meta">
+                <span>📍 清远市非遗体验中心 · 综合教室</span>
+                <span>🕐 2027年3月8日 14:00-17:00</span>
+            </div>
+            <p>三八妇女节特别策划，绒花传承人指导制作绒花发饰，苏绣传承人教授刺绣基础针法。活动面向女性朋友免费开放，名额50人，先到先得。完成作品可带走留念，现场提供茶歇和交流空间。欢迎闺蜜组团参加，感受非遗之美。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 活动23：植树节 ===== -->
+    <div class="activity-card" data-type="upcoming offline family">
+        <div class="left">
+            <div class="day">12</div>
+            <div class="month">2027.03</div>
+            <div class="status">📅 即将开始</div>
+        </div>
+        <div class="right">
+            <div class="tag-group">
+                <span class="tag">线下体验</span>
+                <span class="tag">亲子</span>
+                <span class="tag">植树节</span>
+            </div>
+            <h3>植树节 · 油纸伞彩绘自然体验</h3>
+            <div class="meta">
+                <span>📍 清远市文化公园 · 户外草坪</span>
+                <span>🕐 2027年3月12日 14:00-17:00</span>
+            </div>
+            <p>植树节自然主题非遗体验，油纸伞传承人指导在伞面上彩绘花草树木、山水自然，把春天画在伞上。活动结合环保理念与非遗技艺，鼓励参与者用艺术表达对自然的热爱。适合家庭、亲子参与，儿童需在家长陪同下参加。费用：80元/人（含材料费），限40人。</p>
+            <div class="btn-group">
+                <a href="#" class="btn-primary">立即报名</a>
+                <a href="#" class="btn-outline">查看详情</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 无结果提示 ===== -->
+    <div class="no-result" id="noResult">
+        <p style="font-size:48px;margin-bottom:12px;">🔍</p>
+        <p>暂无符合条件的活动</p>
+        <p style="font-size:14px;margin-top:6px;">请尝试其他筛选条件</p>
+    </div>
+
+    <!-- ===== 底部 ===== -->
+    <div style="text-align:center;padding:35px 20px;background:rgba(251, 245, 239, 0.6);border-radius:16px;border:1px solid rgba(200, 195, 188, 0.25);margin:10px 0 30px;">
+    <p style="color:#7a7a6a;font-size:18px;letter-spacing:2px;margin-bottom:6px;">📢 更多非遗活动持续更新中</p>
+    <p style="color:#a3a88f;font-size:14px;letter-spacing:1px;">关注本网站或微信公众号，第一时间获取活动资讯</p>
+    <div style="margin-top:14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <span style="display:inline-block;padding:6px 20px;background:rgba(255,255,255,0.5);border-radius:25px;border:1px solid rgba(200,195,188,0.2);color:#6a6a5a;font-size:13px;">📱 微信公众号：中华非遗文化</span>
+        <span style="display:inline-block;padding:6px 20px;background:rgba(255,255,255,0.5);border-radius:25px;border:1px solid rgba(200,195,188,0.2);color:#6a6a5a;font-size:13px;">📧 活动合作：fyhd@ichina.com</span>
+    </div>
+</div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 弘扬中华优秀传统文化 · 让非遗活在当下</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+(function() {
+    var btns = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.activity-card');
+    var countEl = document.getElementById('filterCount');
+    var noResult = document.getElementById('noResult');
+
+    function filterActivities(filter) {
+        var visible = 0;
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var types = card.getAttribute('data-type');
+            if (!types) types = '';
+            if (filter === 'all' || types.indexOf(filter) !== -1) {
+                card.style.display = 'flex';
+                visible = visible + 1;
+            } else {
+                card.style.display = 'none';
+            }
+        }
+        if (visible === 0) {
+            noResult.style.display = 'block';
+        } else {
+            noResult.style.display = 'none';
+        }
+        countEl.innerHTML = '共 ' + visible + ' 个活动';
+    }
+
+    for (var j = 0; j < btns.length; j++) {
+        btns[j].onclick = function(e) {
+            e.preventDefault();
+            for (var k = 0; k < btns.length; k++) {
+                btns[k].className = 'filter-btn';
+            }
+            this.className = 'filter-btn active';
+            var filter = this.getAttribute('data-filter');
+            filterActivities(filter);
+        };
+    }
+})();
+</script>
+
+</body>
+</html>

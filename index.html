@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>中华非遗文化 - 首页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== 下拉菜单样式 ===== */
+        .nav-item-dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 0 4px;
+        }
+
+        .nav-item-dropdown > a {
+            display: block;
+            color: #fff;
+            padding: 15px 8px 15px 12px;
+            font-size: 14px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-item-dropdown .dropdown-arrow {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 4px 4px 4px 0;
+            user-select: none;
+        }
+
+        .nav-item-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 10px 0;
+            min-width: 180px;
+            box-shadow: 0 12px 44px rgba(0, 0, 0, 0.10);
+            border: 1px solid rgba(200, 195, 188, 0.18);
+            z-index: 1000;
+            list-style: none;
+        }
+
+        .nav-item-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 22px;
+            color: #4a4a4a;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .dropdown-menu li a:hover {
+            background: rgba(163, 168, 143, 0.10);
+            color: #7a7a6a;
+        }
+
+        /* 加个小圆点装饰 */
+        .dropdown-menu li a::before {
+            content: "◆ ";
+            color: #a3a88f;
+            font-size: 10px;
+            opacity: 0.6;
+        }
+
+        @media screen and (max-width: 768px) {
+            .dropdown-menu {
+                min-width: 150px;
+                right: 0;
+                left: auto;
+            }
+            .dropdown-menu li a {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+<header>
+    <div class="container nav-box">
+        <div class="logo">中华非遗文化传承网</div>
+       <ul class="nav-list">
+    <!-- 首页带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="index.html">首页</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="#jingdian">经典非遗分类</a ></li>
+            <li><a href="#jiangren">匠人推荐</a ></li>
+            <li><a href="#tese">特色非遗精选</a ></li>
+        </ul>
+    </li>
+    <!-- 非遗浏览带下拉 -->
+    <li class="nav-item-dropdown">
+        <a href="liulan.html">非遗浏览</a >
+        <span class="dropdown-arrow">▾</span>
+        <ul class="dropdown-menu">
+            <li><a href="liulan.html#region-east">🌅 东部</a ></li>
+            <li><a href="liulan.html#region-west">🏔️ 西部</a ></li>
+            <li><a href="liulan.html#region-south">🌴 南部</a ></li>
+            <li><a href="liulan.html#region-north">❄️ 北部</a ></li>
+            <li><a href="liulan.html#region-central">🏮 中部</a ></li>
+        </ul>
+    </li>
+    <li><a href="kepu.html">非遗科普</a ></li>
+    <li><a href="jishi.html">传承人纪实</a ></li>
+    <li><a href="huodong.html">非遗活动</a ></li>
+    <li><a href="liuyan.html">留言互动</a ></li>
+    <li><a href="search.html">检索查询</a ></li>
+    <li><a href="guanlian.html">联系我们</a ></li>
+    <li><a href="about.html">关于本站</a ></li>
+</ul>
+    </div>
+</header>
+
+<div class="notice">
+    <div class="container notice-scroll">
+        <p>【公告】2026全国非遗博览会即将开展 | 校园非遗手作工坊线下招募 | 苏绣传承人线上直播7月10日开播</p>
+    </div>
+</div>
+
+<div class="banner" id="banner">
+    <div class="banner-slider" id="slider">
+        <div class="slide active" style="background-image: url(img/beijing1.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing2.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing3.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing4.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing5.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing6.jpg);"></div>
+        <div class="slide" style="background-image: url(img/beijing7.jpg);"></div>
+    </div>
+
+    <div class="banner-text-center">
+        <div class="sub-line">✦ 中 华 非 遗 文 化 ✦</div>
+        <h1>华夏遗韵</h1>
+        <div class="main-desc">四大门类 · 数十项国家级非物质文化遗产</div>
+        <div class="poem-line">「 一 方 水 土 一 方 艺 ， 千 年 匠 心 永 流 传 」</div>
+    </div>
+
+    <button class="banner-btn banner-btn-left" id="prevBtn">‹</button>
+    <button class="banner-btn banner-btn-right" id="nextBtn">›</button>
+
+    <div class="banner-dots" id="dots">
+        <span class="active" data-index="0"></span>
+        <span data-index="1"></span>
+        <span data-index="2"></span>
+        <span data-index="3"></span>
+        <span data-index="4"></span>
+        <span data-index="5"></span>
+        <span data-index="6"></span>
+    </div>
+</div>
+
+<!-- ===== 经典非遗分类（加 id） ===== -->
+<div class="container" id="jingdian">
+    <div class="hero-title">
+        <h1>经典非遗分类</h1>
+        <p>四大门类，数十项国家级非物质文化遗产</p>
+        <div class="split-line"></div>
+    </div>
+
+    <div class="card-wrap">
+        <div class="card">
+            <img src="img/cixiu2.jpg" alt="刺绣">
+            <div class="card-info">
+                <h3>传统刺绣</h3>
+                <p>京绣、苏绣等传统手工刺绣，一针一线皆是匠心。</p>
+                <a href="detail-chuantongcixiu.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/tanping2.jpg" alt="评弹">
+            <div class="card-info">
+                <h3>传统曲艺</h3>
+                <p>吴语雅韵苏州评弹，流淌百年的口头艺术。</p>
+                <a href="detail-chuantongquyi.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/nisu2.jpg" alt="泥塑">
+            <div class="card-info">
+                <h3>传统泥塑</h3>
+                <p>天津泥人张，彩塑传神，名扬海内外。</p>
+                <a href="detail-chuantongnisu.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/jianzhi2.jpg" alt="剪纸">
+            <div class="card-info">
+                <h3>传统剪纸</h3>
+                <p>民间剪纸，方寸之间尽显民俗风情。</p>
+                <a href="detail-chuantongjianzhi.html">查看全部</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 匠人推荐（加 id） ===== -->
+<div class="container" id="jiangren">
+    <div class="hero-title">
+        <h1>匠人推荐</h1>
+        <p>守艺传承，匠心永恒</p>
+        <div class="split-line"></div>
+    </div>
+    <div class="card-wrap">
+        <div class="card">
+            <img src="img/chenyinghua.jpg" alt="陈英华">
+            <div class="card-info">
+                <h3>苏绣传承人 陈英华</h3>
+                <p>从业42年，专注双面绣技艺创新与传承。</p>
+                <a href="detail-chenyinghua.html">匠人故事</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/zhangyu.jpg" alt="张宇">
+            <div class="card-info">
+                <h3>泥人张第六代传人</h3>
+                <p>复原宫廷彩塑技法，坚守传统手艺。</p>
+                <a href="detail-zhangyu.html">匠人故事</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/zhouhong.jpg" alt="周红">
+            <div class="card-info">
+                <h3>评弹名家 周老师</h3>
+                <p>深耕曲艺教育，让评弹走进校园。</p>
+                <a href="detail-zhouhong.html">匠人故事</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/liyueai.jpg" alt="李月爱">
+            <div class="card-info">
+                <h3>民间剪纸艺人 李月爱</h3>
+                <p>五十年剪纸创作，传承乡土民俗文化。</p>
+                <a href="detail-liyueai.html">匠人故事</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 特色非遗精选（加 id） ===== -->
+<div class="container" id="tese">
+    <div class="hero-title">
+        <h1>特色非遗精选</h1>
+        <p>跨越时空的文化瑰宝</p>
+        <div class="split-line"></div>
+    </div>
+    <div class="card-wrap">
+        <div class="card">
+            <img src="img/yingshi2.jpg" alt="银饰">
+            <div class="card-info">
+                <h3>苗族银饰</h3>
+                <p>手工锻打錾刻，独具民族特色。</p>
+                <a href="detail-yingshi.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/xiuqiu2.jpg" alt="绣球">
+            <div class="card-info">
+                <h3>壮族绣球</h3>
+                <p>藏绣工艺打造，雪域祈福信物。</p>
+                <a href="detail-xiuqiu.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/yunjian1.jpg" alt="云肩">
+            <div class="card-info">
+                <h3>传统云肩</h3>
+                <p>古典刺绣配饰，纹样精美雅致。</p>
+                <a href="detail-yunjian.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/youzhisan2.jpg" alt="油纸伞">
+            <div class="card-info">
+                <h3>油纸伞</h3>
+                <p>百道手工工序，兼具实用与美感。</p>
+                <a href="detail-youzhisan.html">查看详情</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-wrap">
+        <div class="card">
+            <img src="img/yudeng1.jpg" alt="鱼灯">
+            <div class="card-info">
+                <h3>民俗鱼灯</h3>
+                <p>元宵传统灯彩，寓意年年有余。</p>
+                <a href="detail-yudeng.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/ronghua.jpg" alt="绒花">
+            <div class="card-info">
+                <h3>绒花</h3>
+                <p>蚕丝绒制作，谐音荣华，寓意吉祥。</p>
+                <a href="detail-ronghua.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/zaran.jpg" alt="扎染">
+            <div class="card-info">
+                <h3>扎染</h3>
+                <p>手工捆扎染色，纹理独一无二。</p>
+                <a href="detail-zaran.html">查看详情</a>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/gongdeng.jpg" alt="宫灯">
+            <div class="card-info">
+                <h3>宫灯</h3>
+                <p>宫廷灯具瑰宝，精雕细琢典雅华丽。</p>
+                <a href="detail-gongdeng.html">查看详情</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ===== 近年联动入口 ===== -->
+<div class="container" style="margin: 60px auto 30px; text-align: center;">
+    <div class="hero-title">
+        <h1 style="font-size: 38px; color: #7a7a6a; letter-spacing: 6px;">🎭 近年联动</h1>
+        <p style="font-size: 16px; color: #a3a88f; letter-spacing: 3px;">当非遗走进生活 · 跨界联名之美</p>
+        <div class="split-line"></div>
+    </div>
+    <a href="liandong.html" style="display: inline-block; padding: 16px 60px; background: linear-gradient(135deg, #a3a88f, #b8bda3); color: #fff; font-size: 20px; border-radius: 50px; text-decoration: none; letter-spacing: 4px; box-shadow: 0 6px 24px rgba(163, 168, 143, 0.3); transition: all 0.3s;">
+        🎯 探索非遗联名
+    </a>
+    <p style="color: #b8bda3; font-size: 14px; margin-top: 14px; letter-spacing: 1px;">点击进入 · 发现非遗的另一种打开方式</p>
+</div>
+<footer>
+    <div class="container">
+        <p>© 2026 中华非遗文化传承网 | 姓名：XXX | 学号：XXX | 邮箱：XXX@XXX.com</p>
+        <p>
+            <a href="about.html">关于我们</a> |
+            <a href="guanlian.html">联系我们</a> |
+            <a href="liuyan.html">留言反馈</a>
+        </p>
+    </div>
+</footer>
+
+<canvas id="rainCanvas"></canvas>
+
+<style>
+    #rainCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 1;
+    }
+</style>
+
+<script>
+// ============================================================
+// 1. 雨雾特效
+// ============================================================
+(function() {
+    var canvas = document.getElementById('rainCanvas');
+    var ctx = canvas.getContext('2d');
+    var width, height;
+    var raindrops = [];
+    var fogParticles = [];
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function Raindrop() {
+        this.reset();
+    }
+    Raindrop.prototype.reset = function() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height - height;
+        this.length = 20 + Math.random() * 25;
+        this.speed = 6 + Math.random() * 5;
+        this.opacity = 0.3 + Math.random() * 0.25;
+        this.width = 0.6 + Math.random() * 0.6;
+        this.wind = -3.5 + Math.random() * 1.5;
+    };
+    Raindrop.prototype.update = function() {
+        this.x += this.wind;
+        this.y += this.speed;
+        if (this.y > height + 30) {
+            this.reset();
+            this.y = -30;
+        }
+        if (this.x < -50) this.x = width + 50;
+        if (this.x > width + 50) this.x = -50;
+    };
+    Raindrop.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.wind * this.length * 0.35, this.y + this.length);
+        ctx.strokeStyle = 'rgba(210, 225, 240, ' + this.opacity + ')';
+        ctx.lineWidth = this.width;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+    };
+
+    for (var i = 0; i < 350; i++) {
+        var d = new Raindrop();
+        d.y = Math.random() * height;
+        raindrops.push(d);
+    }
+
+    function FogParticle() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = 80 + Math.random() * 180;
+        this.opacity = 0.03 + Math.random() * 0.05;
+        this.speedX = 0.12 + Math.random() * 0.25;
+        this.speedY = 0.03 + Math.random() * 0.08;
+    }
+    FogParticle.prototype.update = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > width + 100) this.x = -100;
+        if (this.x < -100) this.x = width + 100;
+        if (this.y > height + 100) this.y = -100;
+        if (this.y < -100) this.y = height + 100;
+    };
+    FogParticle.prototype.draw = function() {
+        var gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        gradient.addColorStop(0, 'rgba(220, 235, 245, ' + this.opacity + ')');
+        gradient.addColorStop(1, 'rgba(220, 235, 245, 0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    };
+
+    for (var j = 0; j < 35; j++) {
+        fogParticles.push(new FogParticle());
+    }
+
+    function loop() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (var k = 0; k < fogParticles.length; k++) {
+            fogParticles[k].update();
+            fogParticles[k].draw();
+        }
+
+        for (var m = 0; m < raindrops.length; m++) {
+            raindrops[m].update();
+            raindrops[m].draw();
+        }
+
+        requestAnimationFrame(loop);
+    }
+
+    loop();
+
+    window.addEventListener('resize', function() {
+        resize();
+        for (var n = 0; n < raindrops.length; n++) {
+            raindrops[n].x = Math.random() * width;
+            raindrops[n].y = Math.random() * height;
+        }
+    });
+})();
+
+// ============================================================
+// 2. 轮播
+// ============================================================
+(function() {
+    var slides = document.querySelectorAll('#slider .slide');
+    var dots = document.querySelectorAll('#dots span');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var current = 0;
+    var total = slides.length;
+    var timer;
+    var isTransitioning = false;
+
+    function updateSlides(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        for (var i = 0; i < total; i++) {
+            slides[i].classList.remove('active', 'prev', 'next');
+            dots[i].classList.remove('active');
+        }
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+
+        var prevIndex = (index - 1 + total) % total;
+        slides[prevIndex].classList.add('prev');
+
+        var nextIndex = (index + 1) % total;
+        slides[nextIndex].classList.add('next');
+
+        current = index;
+
+        setTimeout(function() {
+            isTransitioning = false;
+        }, 800);
+    }
+
+    function goTo(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        updateSlides(index);
+    }
+
+    function nextSlide() {
+        goTo((current + 1) % total);
+    }
+
+    function startTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(nextSlide, 4000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(current - 1);
+            resetTimer();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(current + 1);
+            resetTimer();
+        });
+    }
+
+    for (var j = 0; j < total; j++) {
+        (function(index) {
+            dots[index].addEventListener('click', function() {
+                goTo(index);
+                resetTimer();
+            });
+        })(j);
+    }
+
+    updateSlides(0);
+    startTimer();
+})();
+</script>
+</div>
+</body>
+</html>
